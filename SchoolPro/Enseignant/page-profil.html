@@ -1,0 +1,44 @@
+<div class="page-header">
+    <h2><i class="fas fa-user" style="margin-right:10px;color:var(--emerald)"></i>Mon profil</h2>
+    <button class="btn btn-primary" onclick="showUserProfile()"><i class="fas fa-edit"></i> Modifier</button>
+</div>
+
+<div class="card" style="max-width:800px;margin:0 auto;">
+    <div style="display:flex;align-items:center;gap:24px;padding:24px;">
+        <div style="width:100px;height:100px;border-radius:50%;background:linear-gradient(135deg,var(--emerald-dim),var(--emerald));display:flex;align-items:center;justify-content:center;font-size:40px;font-weight:700;color:white;flex-shrink:0;" id="profilAvatar">MC</div>
+        <div>
+            <h2 style="font-size:24px;font-weight:700;" id="profilName">Marie Claudel</h2>
+            <p style="color:var(--text-secondary);"><i class="fas fa-envelope"></i> marie.c@schoolpro.ht</p>
+            <p style="color:var(--text-secondary);"><i class="fas fa-book"></i> Mathématiques</p>
+            <div style="display:flex;gap:8px;margin-top:8px;">
+                <span class="badge green"><i class="fas fa-circle"></i> Actif</span>
+                <span class="badge blue"><i class="fas fa-calendar"></i> Enseignant</span>
+            </div>
+        </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;padding:0 24px 24px;">
+        <div style="background:#f8fafc;border-radius:12px;padding:16px;">
+            <h4 style="font-size:14px;font-weight:700;margin-bottom:12px;color:var(--text-primary);">
+                <i class="fas fa-user" style="color:var(--emerald);"></i> Informations personnelles
+            </h4>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+                <div><label style="font-size:10px;color:var(--text-muted);text-transform:uppercase;font-weight:600;">Prénom</label><div style="font-weight:500;" id="pPrenom">Marie</div></div>
+                <div><label style="font-size:10px;color:var(--text-muted);text-transform:uppercase;font-weight:600;">Nom</label><div style="font-weight:500;" id="pNom">Claudel</div></div>
+                <div><label style="font-size:10px;color:var(--text-muted);text-transform:uppercase;font-weight:600;">Téléphone</label><div style="font-weight:500;" id="pTelephone">+509 3710-1000</div></div>
+                <div><label style="font-size:10px;color:var(--text-muted);text-transform:uppercase;font-weight:600;">Email</label><div style="font-weight:500;" id="pEmail">marie.c@schoolpro.ht</div></div>
+            </div>
+        </div>
+        <div style="background:#f8fafc;border-radius:12px;padding:16px;">
+            <h4 style="font-size:14px;font-weight:700;margin-bottom:12px;color:var(--text-primary);">
+                <i class="fas fa-briefcase" style="color:var(--emerald);"></i> Informations professionnelles
+            </h4>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+                <div><label style="font-size:10px;color:var(--text-muted);text-transform:uppercase;font-weight:600;">Matière</label><div style="font-weight:500;" id="pMatiere">Mathématiques</div></div>
+                <div><label style="font-size:10px;color:var(--text-muted);text-transform:uppercase;font-weight:600;">Date d'embauche</label><div style="font-weight:500;" id="pDateEmbauche">01/09/2020</div></div>
+                <div><label style="font-size:10px;color:var(--text-muted);text-transform:uppercase;font-weight:600;">Statut</label><div style="font-weight:500;" id="pStatut">Permanent</div></div>
+                <div><label style="font-size:10px;color:var(--text-muted);text-transform:uppercase;font-weight:600;">Diplôme</label><div style="font-weight:500;" id="pDiplome">Master Mathématiques</div></div>
+            </div>
+        </div>
+    </div>
+</div>

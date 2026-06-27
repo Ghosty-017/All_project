@@ -1,0 +1,33 @@
+<div class="page-header">
+    <h2><i class="fas fa-calendar-check" style="margin-right:10px;color:var(--emerald)"></i>Faire l'appel</h2>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;">
+        <select class="filter-select" id="appelClasse" onchange="loadAppel()">
+            <option value="">Sélectionnez une classe</option>
+        </select>
+        <input type="date" class="filter-select" id="appelDate" value="2025-01-05" onchange="loadAppel()">
+        <button class="btn btn-primary" onclick="saveAppel()"><i class="fas fa-save"></i> Enregistrer</button>
+    </div>
+</div>
+
+<div class="card">
+    <div class="table-wrap">
+        <table>
+            <thead>
+                <tr>
+                    <th>Élève</th>
+                    <th>Présence</th>
+                    <th>Motif (si absent)</th>
+                    <th>Justifiée</th>
+                </tr>
+            </thead>
+            <tbody id="appelTableBody">
+                <tr>
+                    <td colspan="4" style="text-align:center;padding:40px;color:var(--text-muted);">
+                        <i class="fas fa-hand-pointer" style="font-size:32px;display:block;margin-bottom:8px;"></i>
+                        Sélectionnez une classe pour faire l'appel
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

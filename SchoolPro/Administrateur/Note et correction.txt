@@ -1,0 +1,33 @@
+SaaS 
+
+
+
+Page dashboard 
+---Dans la partie action rapide le boutton ajouter un eleve je veux qu'il soient rediriger ver le modal pour l'ajout d'un eleve 
+reponse il ne veut le faire commee je le souhaite 
+
+Page Classe 
+1) dans la case niveau je veux que si je choisi le niveau primaire je veux qu'il defil un autre option pour mettre premier cyle ou deuxieme cycle ou troisieme cycle 
+
+2)je veux que dans la premiere partie du modal si je prend Primaire et e choisi 1er ou 2eme cycle dans la dexieme page du modal on me demande le nom du proffeseur mais si je choisi 3eme cycle ou secondaire dans la premier partie je veux qu'on me propose pas le nom du proff car souvent les classe secondaire on trouver souvent plusieur prof qui vient de dispenser des cours different 
+
+3) je veux que quand j'appuie sur classe je veux qu'il s'ouvre pour me donner des detail comme le nom des eleve qui est dans cette classe pour chaque salle ex si j'ai deux salle de NS1 les proff qui sont effecter dans ces salle pour les different cour 
+
+page Matiere 
+1) je sens qu'il manque quelque chose parce que si il y a plusieur prof de math pour different classe comment je vais pouvoir les identifier ? 
+ou j'a une ide comme j'ai une page pour les ensaignat une fois le inscription terminer je veux qu'on place les prof dans la table des matière qu'il enseigne
+
+Correction 
+
+pour l'imprimer il faut que tout la page apparait 
+
+
+
+# 1. Analyse tout le dossier Projet et capture TOUTES les modifications
+git add .
+
+# 2. Valide tes changements avec un petit message explicatif
+git commit -m "Mise a jour globale des fichiers"
+
+# 3. Propulse le tout sur ton dépôt GitHub "Projet"
+git push

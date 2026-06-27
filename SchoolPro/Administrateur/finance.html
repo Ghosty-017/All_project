@@ -1,0 +1,86 @@
+<div class="page-header">
+  <h2><i class="fas fa-coins" style="margin-right:10px;color:var(--emerald)"></i>Finance & Paiements</h2>
+  <button class="btn btn-primary" onclick="openPaymentModal()"><i class="fas fa-plus"></i> Enregistrer paiement</button>
+</div>
+
+<div class="stats-grid" style="grid-template-columns:repeat(3,1fr)">
+  <div class="stat-card green" onclick="showToast('Total collecté', 'success')">
+    <div class="stat-icon green"><i class="fas fa-circle-check"></i></div>
+    <div class="stat-value">285,000</div>
+    <div class="stat-label">Collecté (HTG)</div>
+    <div class="stat-change up">+18%</div>
+  </div>
+  <div class="stat-card red" onclick="showToast('Total impayés', 'error')">
+    <div class="stat-icon red"><i class="fas fa-triangle-exclamation"></i></div>
+    <div class="stat-value">78,500</div>
+    <div class="stat-label">Impayés (HTG)</div>
+    <div class="stat-change down">34 élèves</div>
+  </div>
+  <div class="stat-card gold" onclick="showToast('Taux de recouvrement', 'info')">
+    <div class="stat-icon gold"><i class="fas fa-chart-line"></i></div>
+    <div class="stat-value">78%</div>
+    <div class="stat-label">Recouvrement</div>
+    <div class="stat-change up">+5%</div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-header">
+    <div class="card-title">Historique des paiements</div>
+    <select class="filter-select"><option>Janvier 2025</option></select>
+  </div>
+  <div class="table-wrap">
+    <table class="finance-table">
+      <thead>
+        <tr>
+          <th>Élève</th>
+          <th>Classe</th>
+          <th>Frais total</th>
+          <th>Payé</th>
+          <th>Restant</th>
+          <th>Statut</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Les données seront chargées dynamiquement -->
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- MODAL PAIEMENT (redondant avec notes.html mais nécessaire pour la page finance) -->
+<div id="paymentModal" class="modal">
+  <div class="modal-content" style="max-width:450px;">
+    <button class="close-modal" onclick="closePaymentModal()">&times;</button>
+    <div class="form-header">
+      <h2><i class="fas fa-money-bill"></i> Encaisser un paiement</h2>
+      <p>Enregistrez un paiement pour l'élève</p>
+    </div>
+    <div class="step-container" style="padding:20px;">
+      <div style="margin-bottom:16px;background:#f8fafc;padding:12px;border-radius:10px;">
+        <div><strong>Élève :</strong> <span id="paymentStudentName">—</span></div>
+        <div><strong>Classe :</strong> <span id="paymentStudentClasse">—</span></div>
+      </div>
+      <input type="hidden" id="paymentEleveId">
+      <div class="form-field" style="margin-bottom:12px;">
+        <label><i class="fas fa-money-bill"></i> Montant (HTG)</label>
+        <input type="number" id="paymentAmount" placeholder="Ex: 2500" min="1" style="padding:10px;border:1px solid #e2e8f0;border-radius:8px;width:100%;">
+      </div>
+      <div class="form-field" style="margin-bottom:12px;">
+        <label><i class="fas fa-calendar"></i> Date</label>
+        <input type="date" id="paymentDate" style="padding:10px;border:1px solid #e2e8f0;border-radius:8px;width:100%;">
+      </div>
+    </div>
+    <div class="form-actions" style="padding:16px 20px 20px;border-top:1px solid #e2e8f0;display:flex;justify-content:flex-end;gap:10px;">
+      <button class="btn-cancel" onclick="closePaymentModal()">Annuler</button>
+      <button class="btn-submit" onclick="processPayment()"><i class="fas fa-check"></i> Enregistrer</button>
+    </div>
+  </div>
+</div>
+
+<style>
+.finance-table td.green { color: #10b981; font-weight:600; }
+.finance-table td.warning { color: #f59e0b; font-weight:600; }
+.finance-table td.danger { color: #ef4444; font-weight:600; }
+</style>

@@ -1,0 +1,34 @@
+<div class="page-header">
+  <h2><i class="fas fa-calendar-xmark" style="margin-right:10px;color:var(--emerald)"></i>Présences & Absences</h2>
+  <div style="display:flex;gap:10px;flex-wrap:wrap;">
+    <input type="date" class="filter-select" id="absenceDate" value="2025-01-05" onchange="renderAbsences()">
+    <select class="filter-select" id="absenceClasse" onchange="renderAbsences()">
+      <option value="5e Année A">5e Année A</option>
+      <option value="5e Année B">5e Année B</option>
+      <option value="4e Année A">4e Année A</option>
+      <option value="3e Année B">3e Année B</option>
+      <option value="6e Année">6e Année</option>
+    </select>
+    <button class="btn btn-primary" onclick="saveAttendance()"><i class="fas fa-save"></i> Enregistrer</button>
+  </div>
+</div>
+
+<div class="card">
+  <div class="table-wrap">
+    <table id="absencesTable">
+      <thead>
+        <tr>
+          <th>Élève</th>
+          <th>Présence</th>
+          <th>Motif (si absent)</th>
+          <th>Justifiée</th>
+          <th>Total absences</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Les données seront chargées dynamiquement -->
+      </tbody>
+    </table>
+  </div>
+</div>
+

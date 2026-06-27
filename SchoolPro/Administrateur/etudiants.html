@@ -1,0 +1,719 @@
+<div class="page-header">
+  <h2><i class="fas fa-users" style="margin-right:10px;color:var(--emerald)"></i>Gestion des élèves</h2>
+  <button class="btn btn-primary" onclick="openStudentModal()"><i class="fas fa-plus"></i> Nouvel élève</button>
+</div>
+
+<div class="filter-bar">
+  <input class="filter-input" type="text" placeholder="Rechercher un élève..." id="searchEleve" onkeyup="filterEleves()">
+  <select class="filter-select" id="classeFilter" onchange="filterEleves()">
+    <option value="">Toutes les classes</option>
+    <option>5e Année A</option>
+    <option>3e Année B</option>
+    <option>4e Année A</option>
+  </select>
+</div>
+
+<div class="card">
+  <div class="table-wrap">
+    <table id="elevesTable">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Élève</th>
+          <th>Classe</th>
+          <th>Date naissance</th>
+          <th>Parent</th>
+          <th>Paiement</th>
+          <th>Statut</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Les données sont chargées dynamiquement -->
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- MODAL 3 ÉTAPES ÉLÈVES - largeur 600px -->
+<div id="studentModal" class="modal">
+  <div class="modal-content" style="width:600px; max-width:90%;">
+    <button class="close-modal" onclick="closeStudentModal()">&times;</button>
+    <div class="form-header">
+      <h2><i class="fas fa-user-graduate"></i> Inscrire un nouvel élève</h2>
+      <p>Remplissez les informations ci-dessous</p>
+    </div>
+
+    <div class="step-indicator">
+      <div class="step active" id="step1Indicator">
+        <div class="step-number"><span>1</span></div>
+        <div class="step-label">Infos personnelles</div>
+        <div class="step-line"></div>
+      </div>
+      <div class="step" id="step2Indicator">
+        <div class="step-number"><span>2</span></div>
+        <div class="step-label">Infos académiques</div>
+        <div class="step-line"></div>
+      </div>
+      <div class="step" id="step3Indicator">
+        <div class="step-number"><span>3</span></div>
+        <div class="step-label">Contact urgence</div>
+        <div class="step-line"></div>
+      </div>
+    </div>
+
+    <div class="step-container">
+      <!-- Étape 1 -->
+      <div class="step-content active" id="step1">
+        <div class="form-row">
+          <div class="form-field">
+            <label>Prénom <span style="color:#ef4444">*</span></label>
+            <input type="text" id="prenom" placeholder="Ex: Jessica">
+          </div>
+          <div class="form-field">
+            <label>Nom <span style="color:#ef4444">*</span></label>
+            <input type="text" id="nom" placeholder="Ex: Pierre">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-field">
+            <label>Email <span style="color:#ef4444">*</span></label>
+            <input type="email" id="email" placeholder="email@ecole.com">
+          </div>
+          <div class="form-field">
+            <label>Photo</label>
+            <input type="file" id="photo" accept="image/*" onchange="previewPhoto(this)">
+            <div class="photo-preview" id="photoPreview"><i class="fas fa-user"></i></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Étape 2 -->
+      <div class="step-content" id="step2">
+        <div class="form-row">
+          <div class="form-field">
+            <label>Matricule <span style="color:#ef4444">*</span></label>
+            <input type="text" id="matricule" placeholder="Ex: 2026-0042">
+          </div>
+          <div class="form-field">
+            <label>Classe <span style="color:#ef4444">*</span></label>
+            <select id="classe">
+              <option value="" disabled selected>Sélectionnez</option>
+              <option>5e Année A</option>
+              <option>4e Année A</option>
+              <option>3e Année B</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-field">
+            <label>Date naissance</label>
+            <input type="date" id="dateNaissance">
+          </div>
+          <div class="form-field">
+            <label>Genre</label>
+            <select id="genre">
+              <option value="">Sélectionnez</option>
+              <option>Féminin</option>
+              <option>Masculin</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- Étape 3 -->
+      <div class="step-content" id="step3">
+        <div class="form-row">
+          <div class="form-field">
+            <label>Nom du tuteur <span style="color:#ef4444">*</span></label>
+            <input type="text" id="tuteur" placeholder="Ex: Jean Pierre">
+          </div>
+          <div class="form-field">
+            <label>Téléphone <span style="color:#ef4444">*</span></label>
+            <input type="tel" id="tel_tuteur" placeholder="Ex: +509 3745-XXXX">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-field">
+            <label>Email tuteur</label>
+            <input type="email" id="email_tuteur" placeholder="tuteur@email.com">
+          </div>
+          <div class="form-field">
+            <label>Adresse</label>
+            <input type="text" id="adresse" placeholder="Adresse complète">
+          </div>
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button type="button" class="btn-cancel" onclick="cancelStudentForm()">Annuler</button>
+        <div style="display: flex; gap: 10px;">
+          <button type="button" class="btn-prev" id="prevBtn" onclick="prevStep()" style="display: none;">Précédent</button>
+          <button type="button" class="btn-next" id="nextBtn" onclick="nextStep()">Suivant</button>
+          <button type="button" class="btn-submit" id="submitBtn" onclick="submitStudentForm()" style="display: none;">Enregistrer</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL FICHE ÉLÈVE - largeur 700px -->
+<div id="ficheModal" class="modal">
+  <div class="modal-content fiche-content" style="width:700px; max-width:90%; max-height:90vh; overflow-y:auto;">
+    <button class="close-modal" onclick="closeFicheModal()">&times;</button>
+    
+    <div class="fiche-header">
+      <div class="fiche-avatar" id="ficheAvatar">MJ</div>
+      <div class="fiche-titre">
+        <h2 id="ficheNomComplet">Marie Jean</h2>
+        <p id="ficheEmail">marie.jean@email.com</p>
+      </div>
+    </div>
+
+    <div class="fiche-body">
+      <div class="fiche-section">
+        <h3><i class="fas fa-user-graduate"></i> Informations personnelles</h3>
+        <div class="fiche-grid">
+          <div class="fiche-item"><label>Prénom :</label><span id="fichePrenom">Marie</span></div>
+          <div class="fiche-item"><label>Nom :</label><span id="ficheNom">Jean</span></div>
+          <div class="fiche-item"><label>Date de naissance :</label><span id="ficheDateNaiss">12/03/2012</span></div>
+          <div class="fiche-item"><label>Genre :</label><span id="ficheGenre">Féminin</span></div>
+          <div class="fiche-item"><label>Matricule :</label><span id="ficheMatricule">001</span></div>
+          <div class="fiche-item"><label>Classe :</label><span id="ficheClasse">5e Année A</span></div>
+        </div>
+      </div>
+
+      <div class="fiche-section">
+        <h3><i class="fas fa-address-book"></i> Contact parent/tuteur</h3>
+        <div class="fiche-grid">
+          <div class="fiche-item"><label>Nom du tuteur :</label><span id="ficheTuteur">Claire Jean</span></div>
+          <div class="fiche-item"><label>Téléphone :</label><span id="ficheTelephone">+509 3710-0000</span></div>
+          <div class="fiche-item"><label>Email tuteur :</label><span id="ficheEmailTuteur">claire.jean@email.com</span></div>
+          <div class="fiche-item"><label>Adresse :</label><span id="ficheAdresse">Port-au-Prince, Haïti</span></div>
+        </div>
+      </div>
+
+      <div class="fiche-section">
+        <h3><i class="fas fa-chart-line"></i> Situation scolaire</h3>
+        <div class="fiche-grid">
+          <div class="fiche-item"><label>Statut :</label><span id="ficheStatut" class="badge green">Actif</span></div>
+          <div class="fiche-item"><label>Paiement :</label><span id="fichePaiement" class="badge green">Payé</span></div>
+          <div class="fiche-item"><label>Moyenne générale :</label><span id="ficheMoyenne">85/100</span></div>
+          <div class="fiche-item"><label>Rang :</label><span id="ficheRang">3ème</span></div>
+        </div>
+      </div>
+
+      <div class="fiche-section">
+        <h3><i class="fas fa-chart-simple"></i> Relevé de notes</h3>
+        <div class="table-wrap">
+          <table class="fiche-table">
+            <thead>
+              <tr><th>Matière</th><th>Interro 1</th><th>Interro 2</th><th>Examen</th><th>Moyenne</th></tr>
+            </thead>
+            <tbody id="ficheNotesList">
+              <!-- Les données sont chargées dynamiquement -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="fiche-actions">
+      <button class="btn-print" onclick="imprimerFiche()"><i class="fas fa-print"></i> Imprimer</button>
+      <button class="btn-close" onclick="closeFicheModal()">Fermer</button>
+    </div>
+  </div>
+</div>
+
+<style>
+/* MODAL STYLES - largeurs conservées */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal.active {
+  display: flex;
+}
+
+.modal-content {
+  background: white;
+  border-radius: 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* La largeur est définie inline sur chaque modal */
+/* studentModal: width:600px; max-width:90% */
+/* ficheModal: width:700px; max-width:90% */
+
+.close-modal {
+  position: absolute;
+  top: 20px;
+  right: 25px;
+  background: none !important;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #94a3b8;
+  width: auto;
+  height: auto;
+  border-radius: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  padding: 0;
+  box-shadow: none;
+}
+
+.close-modal:hover {
+  color: #ef4444 !important;
+  background: none !important;
+  transform: scale(1.1);
+}
+
+.form-header {
+  background: linear-gradient(135deg, #0a1628, #0f2044);
+  color: white;
+  padding: 20px 24px;
+  text-align: center;
+}
+
+.form-header h2 {
+  font-size: 18px;
+  margin-bottom: 4px;
+}
+
+.form-header p {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.step-indicator {
+  display: flex;
+  padding: 16px 20px 0;
+  background: white;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.step {
+  flex: 1;
+  text-align: center;
+  position: relative;
+}
+
+.step-number {
+  width: 32px;
+  height: 32px;
+  background: #e2e8f0;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 13px;
+  color: #64748b;
+  transition: all 0.3s;
+  margin-bottom: 6px;
+}
+
+.step.active .step-number {
+  background: #10b981;
+  color: white;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
+}
+
+.step.completed .step-number {
+  background: #10b981;
+  color: white;
+}
+
+.step.completed .step-number::after {
+  content: '\f00c';
+  font-family: 'Font Awesome 6 Free';
+  font-weight: 900;
+  font-size: 10px;
+}
+
+.step.completed .step-number span {
+  display: none;
+}
+
+.step-label {
+  font-size: 10px;
+  font-weight: 600;
+  color: #64748b;
+}
+
+.step.active .step-label {
+  color: #10b981;
+}
+
+.step-line {
+  position: absolute;
+  top: 16px;
+  left: 50%;
+  width: 100%;
+  height: 2px;
+  background: #e2e8f0;
+  z-index: 0;
+}
+
+.step:last-child .step-line {
+  display: none;
+}
+
+.step.active .step-line,
+.step.completed .step-line {
+  background: #10b981;
+}
+
+.step-container {
+  padding: 20px;
+}
+
+.step-content {
+  display: none;
+  animation: fadeSlide 0.3s ease;
+}
+
+.step-content.active {
+  display: block;
+}
+
+@keyframes fadeSlide {
+  from {
+    opacity: 0;
+    transform: translateX(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.form-row {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.form-field {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.form-field label {
+  font-size: 11px;
+  font-weight: 600;
+  color: #1e293b;
+}
+
+.form-field label span {
+  color: #ef4444;
+  font-size: 11px;
+}
+
+.form-field input,
+.form-field select {
+  padding: 8px 10px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 12px;
+  font-family: 'Inter', sans-serif;
+  background: #f8fafc;
+}
+
+.form-field input:focus,
+.form-field select:focus {
+  outline: none;
+  border-color: #10b981;
+  background: white;
+}
+
+.photo-preview {
+  margin-top: 6px;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background: #f1f5f9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border: 1px solid #e2e8f0;
+}
+
+.photo-preview i {
+  font-size: 18px;
+  color: #94a3b8;
+}
+
+.photo-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid #e2e8f0;
+}
+
+.btn-prev {
+  background: #f1f5f9;
+  color: #475569;
+  padding: 7px 14px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 12px;
+  cursor: pointer;
+  border: none;
+}
+
+.btn-prev:hover {
+  background: #e2e8f0;
+}
+
+.btn-next {
+  background: #10b981;
+  color: white;
+  padding: 7px 18px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 12px;
+  cursor: pointer;
+  border: none;
+}
+
+.btn-next:hover {
+  background: #059669;
+}
+
+.btn-submit {
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: white;
+  padding: 7px 18px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 12px;
+  cursor: pointer;
+  border: none;
+}
+
+.btn-submit:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
+}
+
+.btn-cancel {
+  background: white;
+  border: 1px solid #e2e8f0;
+  color: #64748b;
+  padding: 7px 14px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.btn-cancel:hover {
+  background: #fef2f2;
+  border-color: #ef4444;
+  color: #dc2626;
+}
+
+/* STYLES FICHE ÉLÈVE */
+.fiche-content {
+  width: 700px;
+  max-width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.fiche-header {
+  background: linear-gradient(135deg, #0a1628, #0f2044);
+  color: white;
+  padding: 30px 24px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.fiche-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #10b981, #059669);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  font-weight: 700;
+  color: white;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.fiche-titre h2 {
+  font-size: 22px;
+  margin-bottom: 5px;
+}
+
+.fiche-titre p {
+  font-size: 13px;
+  color: rgba(255,255,255,0.7);
+}
+
+.fiche-body {
+  padding: 24px;
+}
+
+.fiche-section {
+  margin-bottom: 28px;
+  border-bottom: 1px solid #e2e8f0;
+  padding-bottom: 20px;
+}
+
+.fiche-section:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.fiche-section h3 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1e293b;
+  margin-bottom: 16px;
+}
+
+.fiche-section h3 i {
+  color: #10b981;
+  margin-right: 8px;
+}
+
+.fiche-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+}
+
+.fiche-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.fiche-item label {
+  font-size: 11px;
+  font-weight: 600;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.fiche-item span {
+  font-size: 14px;
+  font-weight: 500;
+  color: #1e293b;
+}
+
+.fiche-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.fiche-table th,
+.fiche-table td {
+  padding: 10px 8px;
+  text-align: left;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.fiche-table th {
+  background: #f8fafc;
+  font-weight: 600;
+  color: #475569;
+}
+
+.fiche-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  padding: 16px 24px 24px;
+  border-top: 1px solid #e2e8f0;
+  background: white;
+}
+
+.btn-print {
+  background: #f1f5f9;
+  color: #475569;
+  padding: 8px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 12px;
+  cursor: pointer;
+  border: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-print:hover {
+  background: #e2e8f0;
+}
+
+.btn-close {
+  background: #10b981;
+  color: white;
+  padding: 8px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 12px;
+  cursor: pointer;
+  border: none;
+}
+
+.btn-close:hover {
+  background: #059669;
+}
+
+@media (max-width: 560px) {
+  .form-row {
+    flex-direction: column;
+    gap: 10px;
+  }
+  .step-label {
+    font-size: 9px;
+  }
+  .step-number {
+    width: 28px;
+    height: 28px;
+    font-size: 11px;
+  }
+  .fiche-grid {
+    grid-template-columns: 1fr;
+  }
+  .fiche-header {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+</style>

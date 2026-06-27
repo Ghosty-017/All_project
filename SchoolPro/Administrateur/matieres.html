@@ -1,0 +1,506 @@
+<div class="page-header">
+  <h2><i class="fas fa-book-open" style="margin-right:10px;color:var(--emerald)"></i>Matières</h2>
+  <button class="btn btn-primary" onclick="openMatiereModal()"><i class="fas fa-plus"></i> Nouvelle matière</button>
+</div>
+
+<div class="matieres-list">
+  <div class="matiere-item" onclick="showToast('Détails Mathématiques', 'info')">
+    <div><strong>Mathématiques</strong><div style="font-size:12px;color:var(--text-muted);margin-top:4px;">Coefficient 4 · Professeur : Marie Claudel</div></div>
+    <span class="badge blue">4 classes</span>
+  </div>
+  <div class="matiere-item" onclick="showToast('Détails Français', 'info')">
+    <div><strong>Français</strong><div style="font-size:12px;color:var(--text-muted);margin-top:4px;">Coefficient 4 · Professeur : Jean Dorval</div></div>
+    <span class="badge blue">6 classes</span>
+  </div>
+  <div class="matiere-item" onclick="showToast('Détails Créole', 'info')">
+    <div><strong>Créole</strong><div style="font-size:12px;color:var(--text-muted);margin-top:4px;">Coefficient 2 · Professeur : Catherine Paul</div></div>
+    <span class="badge blue">6 classes</span>
+  </div>
+  <div class="matiere-item" onclick="showToast('Détails Sciences', 'info')">
+    <div><strong>Sciences</strong><div style="font-size:12px;color:var(--text-muted);margin-top:4px;">Coefficient 3 · Professeur : Sophie Baptiste</div></div>
+    <span class="badge blue">5 classes</span>
+  </div>
+</div>
+
+<!-- MODAL AJOUT MATIERE - 2 ÉTAPES -->
+<div id="matiereModal" class="modal">
+  <div class="modal-content">
+    <button class="close-modal" onclick="closeMatiereModal()">&times;</button>
+    <div class="form-header">
+      <h2><i class="fas fa-book-open"></i> Ajouter une matière</h2>
+      <p>Remplissez les informations ci-dessous</p>
+    </div>
+
+    <div class="step-indicator">
+      <div class="step active" id="matiereStep1Indicator">
+        <div class="step-number"><span>1</span></div>
+        <div class="step-label">Informations générales</div>
+        <div class="step-line"></div>
+      </div>
+      <div class="step" id="matiereStep2Indicator">
+        <div class="step-number"><span>2</span></div>
+        <div class="step-label">Professeur & Classes</div>
+        <div class="step-line"></div>
+      </div>
+    </div>
+
+    <div class="step-container">
+      <!-- Étape 1 : Informations générales -->
+      <div class="step-content active" id="matiereStep1">
+        <div class="form-row">
+          <div class="form-field">
+            <label><i class="fas fa-tag"></i> Nom de la matière <span style="color:#ef4444">*</span></label>
+            <input type="text" id="matiereNom" placeholder="Ex: Mathématiques">
+          </div>
+          <div class="form-field">
+            <label><i class="fas fa-calculator"></i> Coefficient <span style="color:#ef4444">*</span></label>
+            <input type="number" id="matiereCoefficient" placeholder="Ex: 4" min="1" max="10" value="1">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-field">
+            <label><i class="fas fa-palette"></i> Couleur</label>
+            <select id="matiereCouleur">
+              <option value="blue">Bleu</option>
+              <option value="green">Vert</option>
+              <option value="red">Rouge</option>
+              <option value="orange">Orange</option>
+              <option value="purple">Violet</option>
+              <option value="pink">Rose</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label><i class="fas fa-hourglass-half"></i> Volume horaire</label>
+            <input type="text" id="matiereVolume" placeholder="Ex: 4h/semaine">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-field">
+            <label><i class="fas fa-align-left"></i> Description</label>
+            <textarea id="matiereDescription" rows="2" placeholder="Description de la matière..." style="padding:8px 10px;border:1px solid #e2e8f0;border-radius:8px;font-size:12px;font-family:'Inter',sans-serif;background:#f8fafc;"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <!-- Étape 2 : Professeur & Classes -->
+      <div class="step-content" id="matiereStep2">
+        <div class="form-row">
+          <div class="form-field">
+            <label><i class="fas fa-chalkboard-user"></i> Professeur responsable</label>
+            <select id="matiereProfesseur">
+              <option value="">Sélectionnez un professeur</option>
+              <option value="Marie Claudel">Marie Claudel</option>
+              <option value="Jean Dorval">Jean Dorval</option>
+              <option value="Sophie Baptiste">Sophie Baptiste</option>
+              <option value="Louis Michel">Louis Michel</option>
+              <option value="Catherine Paul">Catherine Paul</option>
+              <option value="Antoine Dubois">Antoine Dubois</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label><i class="fas fa-door-open"></i> Classe(s) associée(s)</label>
+            <select id="matiereClasses" multiple size="3" style="height:auto; min-height:80px;">
+              <option value="1ère Année A">1ère Année A</option>
+              <option value="2e Année A">2e Année A</option>
+              <option value="3e Année B">3e Année B</option>
+              <option value="4e Année A">4e Année A</option>
+              <option value="5e Année A">5e Année A</option>
+              <option value="6e Année">6e Année</option>
+            </select>
+            <small style="font-size:10px;color:#64748b">Ctrl+Click pour sélectionner plusieurs</small>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-field">
+            <label><i class="fas fa-star"></i> Type de matière</label>
+            <select id="matiereType">
+              <option value="Fondamentale">Fondamentale</option>
+              <option value="Scientifique">Scientifique</option>
+              <option value="Littéraire">Littéraire</option>
+              <option value="Artistique">Artistique</option>
+              <option value="Sportive">Sportive</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label><i class="fas fa-chart-line"></i> Niveau de difficulté</label>
+            <select id="matiereDifficulte">
+              <option value="Facile">Facile</option>
+              <option value="Moyen">Moyen</option>
+              <option value="Difficile">Difficile</option>
+              <option value="Très difficile">Très difficile</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button type="button" class="btn-cancel" onclick="cancelMatiereForm()">Annuler</button>
+        <div style="display: flex; gap: 10px;">
+          <button type="button" class="btn-prev" id="matierePrevBtn" onclick="matierePrevStep()" style="display: none;">Précédent</button>
+          <button type="button" class="btn-next" id="matiereNextBtn" onclick="matiereNextStep()">Suivant</button>
+          <button type="button" class="btn-submit" id="matiereSubmitBtn" onclick="submitMatiereForm()" style="display: none;">Enregistrer</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+/* Styles spécifiques à la page matieres */
+.matieres-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.matiere-item {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 16px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.matiere-item:hover {
+  transform: translateX(4px);
+  border-color: var(--emerald-light);
+}
+
+.matiere-item strong {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.badge.blue {
+  background: #e0f2fe;
+  color: #0284c7;
+}
+
+/* MODAL STYLES */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal.active {
+  display: flex;
+}
+
+.modal-content {
+  background: white;
+  border-radius: 20px;
+  width: 580px;
+  max-width: 90%;
+  max-height: 90vh;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.close-modal {
+  position: absolute;
+  top: 20px;
+  right: 25px;
+  background: none !important;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #94a3b8;
+  width: auto;
+  height: auto;
+  border-radius: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  padding: 0;
+  box-shadow: none;
+}
+
+.close-modal:hover {
+  color: #ef4444 !important;
+  background: none !important;
+  transform: scale(1.1);
+}
+
+.form-header {
+  background: linear-gradient(135deg, #0a1628, #0f2044);
+  color: white;
+  padding: 20px 24px;
+  text-align: center;
+  flex-shrink: 0;
+  border-radius:  0 0;
+}
+
+.form-header h2 {
+  font-size: 18px;
+  margin-bottom: 4px;
+}
+
+.form-header p {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.step-indicator {
+  display: flex;
+  padding: 16px 24px 0;
+  background: white;
+  border-bottom: 1px solid #e2e8f0;
+  flex-shrink: 0;
+}
+
+.step {
+  flex: 1;
+  text-align: center;
+  position: relative;
+}
+
+.step-number {
+  width: 28px;
+  height: 28px;
+  background: #e2e8f0;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 12px;
+  color: #64748b;
+  transition: all 0.3s;
+  margin-bottom: 4px;
+}
+
+.step-label {
+  font-size: 10px;
+  font-weight: 600;
+  color: #64748b;
+}
+
+.step.active .step-number {
+  background: #10b981;
+  color: white;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
+}
+
+.step.completed .step-number {
+  background: #10b981;
+  color: white;
+}
+
+.step.active .step-label {
+  color: #10b981;
+}
+
+.step-line {
+  position: absolute;
+  top: 14px;
+  left: 50%;
+  width: 100%;
+  height: 2px;
+  background: #e2e8f0;
+  z-index: 0;
+}
+
+.step:last-child .step-line {
+  display: none;
+}
+
+.step.active .step-line,
+.step.completed .step-line {
+  background: #10b981;
+}
+
+.step-container {
+  padding: 20px 24px;
+  flex: 1;
+  overflow-y: auto;
+}
+
+.step-content {
+  display: none;
+  animation: fadeSlide 0.3s ease;
+}
+
+.step-content.active {
+  display: block;
+}
+
+@keyframes fadeSlide {
+  from {
+    opacity: 0;
+    transform: translateX(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.form-row {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.form-field {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.form-field label {
+  font-size: 11px;
+  font-weight: 600;
+  color: #1e293b;
+}
+
+.form-field label i {
+  margin-right: 4px;
+  color: #10b981;
+  font-size: 10px;
+}
+
+.form-field label span {
+  color: #ef4444;
+}
+
+.form-field input,
+.form-field select,
+.form-field textarea {
+  padding: 8px 10px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 12px;
+  font-family: 'Inter', sans-serif;
+  background: #f8fafc;
+}
+
+.form-field input:focus,
+.form-field select:focus,
+.form-field textarea:focus {
+  outline: none;
+  border-color: #10b981;
+  background: white;
+}
+
+.form-field select[multiple] {
+  padding: 6px;
+}
+
+.form-field select[multiple] option {
+  padding: 6px 8px;
+  border-radius: 4px;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 16px 24px 20px;
+  border-top: 1px solid #e2e8f0;
+  background: white;
+  flex-shrink: 0;
+  border-radius: 0 0 20px 20px;
+}
+
+.btn-prev {
+  background: #f1f5f9;
+  color: #475569;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 12px;
+  cursor: pointer;
+  border: none;
+}
+
+.btn-prev:hover {
+  background: #e2e8f0;
+}
+
+.btn-next {
+  background: #10b981;
+  color: white;
+  padding: 8px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 12px;
+  cursor: pointer;
+  border: none;
+}
+
+.btn-next:hover {
+  background: #059669;
+}
+
+.btn-submit {
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: white;
+  padding: 8px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 12px;
+  cursor: pointer;
+  border: none;
+}
+
+.btn-submit:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
+}
+
+.btn-cancel {
+  background: white;
+  border: 1px solid #e2e8f0;
+  color: #64748b;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.btn-cancel:hover {
+  background: #fef2f2;
+  border-color: #ef4444;
+  color: #dc2626;
+}
+
+@media (max-width: 560px) {
+  .form-row {
+    flex-direction: column;
+    gap: 10px;
+  }
+  .step-label {
+    font-size: 8px;
+  }
+  .step-number {
+    width: 24px;
+    height: 24px;
+    font-size: 10px;
+  }
+  .step-container {
+    padding: 16px;
+  }
+  .form-actions {
+    padding: 12px 16px;
+  }
+}
+</style>
+

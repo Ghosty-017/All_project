@@ -1,0 +1,65 @@
+<div class="page-header">
+    <h2><i class="fas fa-user" style="margin-right:10px;color:var(--emerald)"></i>Mon profil</h2>
+    <button class="btn btn-primary" onclick="showToast('Profil modifié', 'success')"><i class="fas fa-edit"></i> Modifier</button>
+</div>
+
+<div class="card" style="max-width:800px;margin:0 auto;">
+    <div style="display:flex;align-items:center;gap:24px;padding:24px;">
+        <div style="width:100px;height:100px;border-radius:50%;background:linear-gradient(135deg,var(--emerald-dim),var(--emerald));display:flex;align-items:center;justify-content:center;font-size:40px;font-weight:700;color:white;flex-shrink:0;">
+            MJ
+        </div>
+        <div>
+            <h2 style="font-size:24px;font-weight:700;">Marie Jean</h2>
+            <p style="color:var(--text-secondary);"><i class="fas fa-envelope"></i> marie.jean@email.com</p>
+            <p style="color:var(--text-secondary);"><i class="fas fa-id-card"></i> Matricule : 001</p>
+            <div style="display:flex;gap:8px;margin-top:8px;">
+                <span class="badge green"><i class="fas fa-circle"></i> Actif</span>
+                <span class="badge green"><i class="fas fa-check"></i> Payé</span>
+            </div>
+        </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;padding:0 24px 24px;">
+        <div style="background:#f8fafc;border-radius:12px;padding:16px;">
+            <h4 style="font-size:14px;font-weight:700;margin-bottom:12px;color:var(--text-primary);">
+                <i class="fas fa-user" style="color:var(--emerald);"></i> Informations personnelles
+            </h4>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+                <div><label style="font-size:10px;color:var(--text-muted);text-transform:uppercase;font-weight:600;">Prénom</label><div style="font-weight:500;">Marie</div></div>
+                <div><label style="font-size:10px;color:var(--text-muted);text-transform:uppercase;font-weight:600;">Nom</label><div style="font-weight:500;">Jean</div></div>
+                <div><label style="font-size:10px;color:var(--text-muted);text-transform:uppercase;font-weight:600;">Date naissance</label><div style="font-weight:500;">12/03/2012</div></div>
+                <div><label style="font-size:10px;color:var(--text-muted);text-transform:uppercase;font-weight:600;">Genre</label><div style="font-weight:500;">Féminin</div></div>
+                <div style="grid-column:span 2;"><label style="font-size:10px;color:var(--text-muted);text-transform:uppercase;font-weight:600;">Adresse</label><div style="font-weight:500;">Port-au-Prince, Haïti</div></div>
+            </div>
+        </div>
+        <div style="background:#f8fafc;border-radius:12px;padding:16px;">
+            <h4 style="font-size:14px;font-weight:700;margin-bottom:12px;color:var(--text-primary);">
+                <i class="fas fa-address-book" style="color:var(--emerald);"></i> Contact tuteur
+            </h4>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+                <div style="grid-column:span 2;"><label style="font-size:10px;color:var(--text-muted);text-transform:uppercase;font-weight:600;">Nom du tuteur</label><div style="font-weight:500;">Claire Jean</div></div>
+                <div><label style="font-size:10px;color:var(--text-muted);text-transform:uppercase;font-weight:600;">Téléphone</label><div style="font-weight:500;">+509 3710-0000</div></div>
+                <div><label style="font-size:10px;color:var(--text-muted);text-transform:uppercase;font-weight:600;">Email</label><div style="font-weight:500;">claire.jean@email.com</div></div>
+            </div>
+        </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;padding:0 24px 24px;">
+        <div style="background:#f8fafc;border-radius:10px;padding:12px;text-align:center;">
+            <div style="font-size:10px;color:var(--text-muted);text-transform:uppercase;">Classe</div>
+            <div style="font-weight:700;font-size:16px;">5e Année A</div>
+        </div>
+        <div style="background:#f8fafc;border-radius:10px;padding:12px;text-align:center;">
+            <div style="font-size:10px;color:var(--text-muted);text-transform:uppercase;">Moyenne</div>
+            <div style="font-weight:700;font-size:16px;color:var(--emerald);">83/100</div>
+        </div>
+        <div style="background:#f8fafc;border-radius:10px;padding:12px;text-align:center;">
+            <div style="font-size:10px;color:var(--text-muted);text-transform:uppercase;">Rang</div>
+            <div style="font-weight:700;font-size:16px;color:var(--gold);">3ème</div>
+        </div>
+        <div style="background:#f8fafc;border-radius:10px;padding:12px;text-align:center;">
+            <div style="font-size:10px;color:var(--text-muted);text-transform:uppercase;">Absences</div>
+            <div style="font-weight:700;font-size:16px;color:var(--danger);">3</div>
+        </div>
+    </div>
+</div>

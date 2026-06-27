@@ -1,0 +1,520 @@
+<div class="page-header">
+  <h2><i class="fas fa-door-open" style="margin-right:10px;color:var(--emerald)"></i>Classes</h2>
+  <button class="btn btn-primary" onclick="openClassModal()"><i class="fas fa-plus"></i> Nouvelle classe</button>
+</div>
+
+<div class="classes-grid">
+  <div class="class-card" onclick="showToast('Détails 1ère Année A', 'info')">
+    <h4>1ère Année A</h4>
+    <div class="class-stats"><span><strong>28</strong> élèves</span><span><strong>1</strong> prof principal</span></div>
+    <span class="badge green">Salle 101</span>
+    <div class="mt-2" style="margin-top:12px;font-size:12px;color:var(--text-muted)">Professeur : Marie Claudel</div>
+  </div>
+  <div class="class-card" onclick="showToast('Détails 2e Année A', 'info')">
+    <h4>2e Année A</h4>
+    <div class="class-stats"><span><strong>32</strong> élèves</span><span><strong>1</strong> prof principal</span></div>
+    <span class="badge green">Salle 102</span>
+    <div style="margin-top:12px;font-size:12px;color:var(--text-muted)">Professeur : Jean Dorval</div>
+  </div>
+  <div class="class-card" onclick="showToast('Détails 3e Année B', 'info')">
+    <h4>3e Année B</h4>
+    <div class="class-stats"><span><strong>25</strong> élèves</span><span><strong>1</strong> prof principal</span></div>
+    <span class="badge green">Salle 103</span>
+    <div style="margin-top:12px;font-size:12px;color:var(--text-muted)">Professeur : Sophie Baptiste</div>
+  </div>
+</div>
+
+<!-- MODAL AJOUT CLASSE - 2 ÉTAPES -->
+<div id="classModal" class="modal">
+  <div class="modal-content">
+    <button class="close-modal" onclick="closeClassModal()">&times;</button>
+    <div class="form-header">
+      <h2><i class="fas fa-door-open"></i> Ajouter une classe</h2>
+      <p>Remplissez les informations ci-dessous</p>
+    </div>
+
+    <div class="step-indicator">
+      <div class="step active" id="classStep1Indicator">
+        <div class="step-number"><span>1</span></div>
+        <div class="step-label">Informations générales</div>
+        <div class="step-line"></div>
+      </div>
+      <div class="step" id="classStep2Indicator">
+        <div class="step-number"><span>2</span></div>
+        <div class="step-label">Affectations</div>
+        <div class="step-line"></div>
+      </div>
+    </div>
+
+    <div class="step-container">
+      <!-- Étape 1 : Informations générales -->
+      <div class="step-content active" id="classStep1">
+        <div class="form-row">
+          <div class="form-field">
+            <label><i class="fas fa-tag"></i> Nom de la classe <span style="color:#ef4444">*</span></label>
+            <input type="text" id="className" placeholder="Ex: 4e Année A">
+          </div>
+          <div class="form-field">
+            <label><i class="fas fa-door-open"></i> Salle <span style="color:#ef4444">*</span></label>
+            <input type="text" id="classRoom" placeholder="Ex: Salle 104">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-field">
+            <label><i class="fas fa-calendar-alt"></i> Année scolaire</label>
+            <select id="classYear">
+              <option value="2024-2025">2024-2025</option>
+              <option value="2025-2026">2025-2026</option>
+              <option value="2026-2027">2026-2027</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label><i class="fas fa-layer-group"></i> Niveau</label>
+            <select id="classLevel">
+              <option value="Primaire">Primaire</option>
+              <option value="Secondaire">Secondaire</option>
+              <option value="Terminale">Terminale</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-field">
+            <label><i class="fas fa-users"></i> Capacité maximale</label>
+            <input type="number" id="classCapacity" placeholder="Ex: 35">
+          </div>
+          <div class="form-field">
+            <label><i class="fas fa-clock"></i> Horaire</label>
+            <input type="text" id="classSchedule" placeholder="Ex: 8h-12h / 13h-16h">
+          </div>
+        </div>
+      </div>
+
+      <!-- Étape 2 : Affectations -->
+      <div class="step-content" id="classStep2">
+        <div class="form-row">
+          <div class="form-field">
+            <label><i class="fas fa-chalkboard-user"></i> Professeur principal</label>
+            <select id="classTeacher">
+              <option value="">Sélectionnez un professeur</option>
+              <option value="Marie Claudel">Marie Claudel</option>
+              <option value="Jean Dorval">Jean Dorval</option>
+              <option value="Sophie Baptiste">Sophie Baptiste</option>
+              <option value="Louis Michel">Louis Michel</option>
+              <option value="Catherine Paul">Catherine Paul</option>
+              <option value="Antoine Dubois">Antoine Dubois</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label><i class="fas fa-user-friends"></i> Nombre d'élèves (actuel)</label>
+            <input type="number" id="classStudentCount" placeholder="Ex: 0" value="0">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-field">
+            <label><i class="fas fa-book"></i> Matières enseignées</label>
+            <input type="text" id="classSubjects" placeholder="Ex: Maths, Français, Sciences">
+          </div>
+          <div class="form-field">
+            <label><i class="fas fa-money-bill"></i> Frais de scolarité</label>
+            <input type="text" id="classFees" placeholder="Ex: 50000 Gdes">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-field">
+            <label><i class="fas fa-align-left"></i> Description</label>
+            <textarea id="classDescription" rows="2" placeholder="Informations supplémentaires..." style="padding:8px 10px;border:1px solid #e2e8f0;border-radius:8px;font-size:12px;font-family:'Inter',sans-serif;background:#f8fafc;"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button type="button" class="btn-cancel" onclick="cancelClassForm()">Annuler</button>
+        <div style="display: flex; gap: 10px;">
+          <button type="button" class="btn-prev" id="classPrevBtn" onclick="classPrevStep()" style="display: none;">Précédent</button>
+          <button type="button" class="btn-next" id="classNextBtn" onclick="classNextStep()">Suivant</button>
+          <button type="button" class="btn-submit" id="classSubmitBtn" onclick="submitClassForm()" style="display: none;">Enregistrer</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+/* Styles spécifiques à la page classes */
+.classes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.class-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 20px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.class-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  border-color: var(--emerald-light);
+}
+
+.class-card h4 {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: var(--text-primary);
+}
+
+.class-stats {
+  display: flex;
+  gap: 16px;
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-bottom: 12px;
+}
+
+.class-stats span strong {
+  color: var(--emerald);
+  font-weight: 700;
+}
+
+/* MODAL STYLES (repris de la page élèves) */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal.active {
+  display: flex;
+}
+
+.modal-content {
+  background: white;
+  border-radius: 20px;
+  width: 600px;
+  max-width: 90%;
+  position: relative;
+  overflow: hidden;
+}
+
+.close-modal {
+  position: absolute;
+  top: 20px;
+  right: 25px;
+  background: none !important;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #94a3b8;
+  width: auto;
+  height: auto;
+  border-radius: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  padding: 0;
+  box-shadow: none;
+}
+
+.close-modal:hover {
+  color: #ef4444 !important;
+  background: none !important;
+  transform: scale(1.1);
+}
+
+.form-header {
+  background: linear-gradient(135deg, #0a1628, #0f2044);
+  color: white;
+  padding: 20px 24px;
+  text-align: center;
+}
+
+.form-header h2 {
+  font-size: 18px;
+  margin-bottom: 4px;
+}
+
+.form-header p {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.step-indicator {
+  display: flex;
+  padding: 16px 20px 0;
+  background: white;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.step {
+  flex: 1;
+  text-align: center;
+  position: relative;
+}
+
+.step-number {
+  width: 32px;
+  height: 32px;
+  background: #e2e8f0;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 13px;
+  color: #64748b;
+  transition: all 0.3s;
+  margin-bottom: 6px;
+}
+
+.step.active .step-number {
+  background: #10b981;
+  color: white;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
+}
+
+.step.completed .step-number {
+  background: #10b981;
+  color: white;
+}
+
+.step.completed .step-number::after {
+  content: '\f00c';
+  font-family: 'Font Awesome 6 Free';
+  font-weight: 900;
+  font-size: 10px;
+}
+
+.step.completed .step-number span {
+  display: none;
+}
+
+.step-label {
+  font-size: 10px;
+  font-weight: 600;
+  color: #64748b;
+}
+
+.step.active .step-label {
+  color: #10b981;
+}
+
+.step-line {
+  position: absolute;
+  top: 16px;
+  left: 50%;
+  width: 100%;
+  height: 2px;
+  background: #e2e8f0;
+  z-index: 0;
+}
+
+.step:last-child .step-line {
+  display: none;
+}
+
+.step.active .step-line,
+.step.completed .step-line {
+  background: #10b981;
+}
+
+.step-container {
+  padding: 20px;
+}
+
+.step-content {
+  display: none;
+  animation: fadeSlide 0.3s ease;
+}
+
+.step-content.active {
+  display: block;
+}
+
+@keyframes fadeSlide {
+  from {
+    opacity: 0;
+    transform: translateX(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.form-row {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.form-field {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.form-field label {
+  font-size: 11px;
+  font-weight: 600;
+  color: #1e293b;
+}
+
+.form-field label i {
+  margin-right: 4px;
+  color: #10b981;
+  font-size: 10px;
+}
+
+.form-field label span {
+  color: #ef4444;
+  font-size: 11px;
+}
+
+.form-field input,
+.form-field select,
+.form-field textarea {
+  padding: 8px 10px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 12px;
+  font-family: 'Inter', sans-serif;
+  background: #f8fafc;
+}
+
+.form-field input:focus,
+.form-field select:focus,
+.form-field textarea:focus {
+  outline: none;
+  border-color: #10b981;
+  background: white;
+}
+
+.photo-preview {
+  margin-top: 6px;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background: #f1f5f9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border: 1px solid #e2e8f0;
+}
+
+.photo-preview i {
+  font-size: 18px;
+  color: #94a3b8;
+}
+
+.photo-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid #e2e8f0;
+}
+
+.btn-prev {
+  background: #f1f5f9;
+  color: #475569;
+  padding: 7px 14px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 12px;
+  cursor: pointer;
+  border: none;
+}
+
+.btn-prev:hover {
+  background: #e2e8f0;
+}
+
+.btn-next {
+  background: #10b981;
+  color: white;
+  padding: 7px 18px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 12px;
+  cursor: pointer;
+  border: none;
+}
+
+.btn-next:hover {
+  background: #059669;
+}
+
+.btn-submit {
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: white;
+  padding: 7px 18px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 12px;
+  cursor: pointer;
+  border: none;
+}
+
+.btn-submit:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
+}
+
+.btn-cancel {
+  background: white;
+  border: 1px solid #e2e8f0;
+  color: #64748b;
+  padding: 7px 14px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.btn-cancel:hover {
+  background: #fef2f2;
+  border-color: #ef4444;
+  color: #dc2626;
+}
+
+@media (max-width: 560px) {
+  .form-row {
+    flex-direction: column;
+    gap: 10px;
+  }
+  .step-label {
+    font-size: 9px;
+  }
+  .step-number {
+    width: 28px;
+    height: 28px;
+    font-size: 11px;
+  }
+}
+</style>
+

@@ -1,0 +1,95 @@
+<div class="stats-grid">
+    <div class="stat-card green" onclick="showToast('Vue d\'ensemble', 'info')">
+        <div class="stat-icon green"><i class="fas fa-users"></i></div>
+        <div class="stat-value" id="totalEleves">0</div>
+        <div class="stat-label">Élèves</div>
+        <div class="stat-change up"><i class="fas fa-arrow-up"></i> +5 ce trimestre</div>
+    </div>
+    <div class="stat-card blue" onclick="showToast('Vos classes', 'info')">
+        <div class="stat-icon blue"><i class="fas fa-door-open"></i></div>
+        <div class="stat-value" id="totalClasses">0</div>
+        <div class="stat-label">Classes enseignées</div>
+        <div class="stat-change up"><i class="fas fa-check"></i> Toutes actives</div>
+    </div>
+    <div class="stat-card gold" onclick="showToast('Notes saisies', 'info')">
+        <div class="stat-icon gold"><i class="fas fa-pen-to-square"></i></div>
+        <div class="stat-value" id="totalNotes">0</div>
+        <div class="stat-label">Notes saisies</div>
+        <div class="stat-change up"><i class="fas fa-arrow-up"></i> +12 ce mois</div>
+    </div>
+    <div class="stat-card red" onclick="showToast('Absences', 'info')">
+        <div class="stat-icon red"><i class="fas fa-calendar-xmark"></i></div>
+        <div class="stat-value" id="totalAbsences">0</div>
+        <div class="stat-label">Absences non justifiées</div>
+        <div class="stat-change down"><i class="fas fa-arrow-down"></i> -3 vs mois dernier</div>
+    </div>
+</div>
+
+<div class="content-grid">
+    <!-- Mes classes -->
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title"><i class="fas fa-door-open" style="margin-right:8px;color:var(--emerald)"></i>Mes classes</div>
+            <button class="card-action" onclick="showPage('classes')">Voir tout →</button>
+        </div>
+        <div id="dashboardClasses" style="padding:12px 16px;">
+            <!-- Chargé dynamiquement -->
+        </div>
+    </div>
+
+    <!-- Activité récente -->
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title"><i class="fas fa-bolt" style="margin-right:8px;color:var(--gold)"></i>Activité récente</div>
+        </div>
+        <div class="activity-list" id="dashboardActivity">
+            <div class="activity-item" onclick="showToast('Notes mises à jour', 'success')">
+                <div class="act-dot green"></div>
+                <div>
+                    <div class="act-text">Notes de <strong>5e Année A</strong> mises à jour</div>
+                    <div class="act-time">Il y a 15 min</div>
+                </div>
+            </div>
+            <div class="activity-item" onclick="showToast('Appel effectué', 'success')">
+                <div class="act-dot blue"></div>
+                <div>
+                    <div class="act-text">Appel effectué pour <strong>4e Année A</strong></div>
+                    <div class="act-time">Il y a 1h</div>
+                </div>
+            </div>
+            <div class="activity-item" onclick="showToast('Bulletin généré', 'success')">
+                <div class="act-dot gold"></div>
+                <div>
+                    <div class="act-text">Bulletin généré pour <strong>3e Année B</strong></div>
+                    <div class="act-time">Il y a 2h</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="second-row">
+    <!-- Emploi du temps -->
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title"><i class="fas fa-clock" style="margin-right:8px;color:var(--info)"></i>Emploi du temps</div>
+            <button class="card-action" onclick="showPage('emploi')">Voir tout →</button>
+        </div>
+        <div class="activity-list" id="dashboardSchedule">
+            <!-- Chargé dynamiquement -->
+        </div>
+    </div>
+
+    <!-- Actions rapides -->
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title"><i class="fas fa-rocket" style="margin-right:8px;color:var(--emerald)"></i>Actions rapides</div>
+        </div>
+        <div class="quick-actions">
+            <button class="quick-btn" onclick="showPage('notes')"><i class="fas fa-pen"></i> Saisir notes</button>
+            <button class="quick-btn" onclick="showPage('appel')"><i class="fas fa-calendar-check"></i> Faire l'appel</button>
+            <button class="quick-btn" onclick="showPage('bulletins')"><i class="fas fa-file-pdf"></i> Bulletins</button>
+            <button class="quick-btn" onclick="showPage('classes')"><i class="fas fa-door-open"></i> Mes classes</button>
+        </div>
+    </div>
+</div>

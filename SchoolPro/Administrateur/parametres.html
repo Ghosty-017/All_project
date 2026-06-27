@@ -1,0 +1,427 @@
+<div class="page-header">
+  <h2><i class="fas fa-sliders" style="margin-right:10px;color:var(--emerald)"></i>Paramètres</h2>
+</div>
+
+<div class="settings-card">
+  <div class="settings-section">
+    <h3>Informations de l'établissement</h3>
+    <div class="settings-row">
+      <div class="settings-label">Nom de l'école</div>
+      <div class="settings-value">
+        <span id="schoolName">Collège Saint-Louis</span>
+        <i class="fas fa-pen" style="color:var(--emerald);cursor:pointer" onclick="openSettingsModal('schoolName', 'Nom de l\'école', 'Entrez le nouveau nom de l\'école')"></i>
+      </div>
+    </div>
+    <div class="settings-row">
+      <div class="settings-label">Adresse</div>
+      <div class="settings-value">
+        <span id="schoolAddress">Port-au-Prince, Haïti</span>
+        <i class="fas fa-pen" style="color:var(--emerald);cursor:pointer" onclick="openSettingsModal('schoolAddress', 'Adresse', 'Entrez la nouvelle adresse')"></i>
+      </div>
+    </div>
+    <div class="settings-row">
+      <div class="settings-label">Année scolaire</div>
+      <div class="settings-value">
+        <span id="schoolYear">2024-2025</span>
+        <i class="fas fa-pen" style="color:var(--emerald);cursor:pointer" onclick="openSettingsModal('schoolYear', 'Année scolaire', 'Entrez la nouvelle année scolaire (ex: 2025-2026)')"></i>
+      </div>
+    </div>
+    <div class="settings-row">
+      <div class="settings-label">Directeur</div>
+      <div class="settings-value">
+        <span id="schoolDirector">Adams Directeur</span>
+        <i class="fas fa-pen" style="color:var(--emerald);cursor:pointer" onclick="openSettingsModal('schoolDirector', 'Directeur', 'Entrez le nom du directeur')"></i>
+      </div>
+    </div>
+    <div class="settings-row">
+      <div class="settings-label">Téléphone</div>
+      <div class="settings-value">
+        <span id="schoolPhone">+509 3700-0000</span>
+        <i class="fas fa-pen" style="color:var(--emerald);cursor:pointer" onclick="openSettingsModal('schoolPhone', 'Téléphone', 'Entrez le nouveau numéro de téléphone')"></i>
+      </div>
+    </div>
+  </div>
+
+  <div class="settings-section">
+    <h3>Préférences système</h3>
+    <div class="settings-row">
+      <div class="settings-label">Thème</div>
+      <div class="settings-value">
+        <select id="themeSelect" class="filter-select" onchange="changeTheme(this.value)" style="padding:6px 12px;">
+          <option value="light">Clair</option>
+          <option value="dark">Sombre</option>
+          <option value="system">Système</option>
+        </select>
+      </div>
+    </div>
+    <div class="settings-row">
+      <div class="settings-label">Sauvegarde automatique</div>
+      <div class="settings-value">
+        <label class="toggle-switch">
+          <input type="checkbox" id="autoSave" checked onchange="toggleAutoSave(this.checked)">
+          <span class="toggle-slider"></span>
+        </label>
+      </div>
+    </div>
+    <div class="settings-row">
+      <div class="settings-label">Langue</div>
+      <div class="settings-value">
+        <select id="languageSelect" class="filter-select" onchange="changeLanguage(this.value)" style="padding:6px 12px;">
+          <option value="fr">Français</option>
+          <option value="en">English</option>
+          <option value="ht">Kreyòl</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div class="settings-section">
+    <h3>Actions</h3>
+    <div class="settings-row">
+      <div class="settings-label">Sauvegarder les données</div>
+      <div class="settings-value">
+        <button class="btn btn-primary" onclick="saveAllData()"><i class="fas fa-database"></i> Sauvegarder</button>
+      </div>
+    </div>
+    <div class="settings-row">
+      <div class="settings-label">Exporter les données</div>
+      <div class="settings-value">
+        <button class="btn btn-outline" onclick="exportData()"><i class="fas fa-file-export"></i> Exporter</button>
+        <button class="btn btn-outline" onclick="importData()"><i class="fas fa-file-import"></i> Importer</button>
+      </div>
+    </div>
+    <div class="settings-row">
+      <div class="settings-label">Notifications</div>
+      <div class="settings-value">
+        <button class="btn btn-outline" onclick="testNotification()"><i class="fas fa-bell"></i> Tester les notifications</button>
+      </div>
+    </div>
+    <div class="settings-row">
+      <div class="settings-label">À propos</div>
+      <div class="settings-value">
+        <button class="btn btn-outline" onclick="showAbout()"><i class="fas fa-info-circle"></i> Informations</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL DE MODIFICATION -->
+<div id="settingsModal" class="modal">
+  <div class="modal-content" style="width:450px; max-width:90%;">
+    <button class="close-modal" onclick="closeSettingsModal()">&times;</button>
+    <div class="form-header">
+      <h2><i class="fas fa-pen"></i> <span id="settingsModalTitle">Modifier</span></h2>
+      <p id="settingsModalDesc">Entrez la nouvelle valeur</p>
+    </div>
+    <div class="step-container" style="padding:20px;">
+      <div class="form-field">
+        <label id="settingsModalLabel">Nouvelle valeur</label>
+        <input type="text" id="settingsModalInput" placeholder="Entrez la nouvelle valeur..." style="padding:10px;border:1px solid #e2e8f0;border-radius:8px;width:100%;font-size:14px;">
+        <input type="hidden" id="settingsModalField">
+      </div>
+    </div>
+    <div class="form-actions" style="padding:16px 20px 20px;border-top:1px solid #e2e8f0;display:flex;justify-content:flex-end;gap:10px;">
+      <button class="btn-cancel" onclick="closeSettingsModal()">Annuler</button>
+      <button class="btn-submit" onclick="saveSettingsModal()"><i class="fas fa-check"></i> Enregistrer</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL À PROPOS -->
+<div id="aboutModal" class="modal">
+  <div class="modal-content" style="width:500px; max-width:90%;">
+    <button class="close-modal" onclick="closeAboutModal()">&times;</button>
+    <div class="form-header" style="text-align:center;">
+      <div style="width:80px;height:80px;background:linear-gradient(135deg,#10b981,#059669);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 12px;font-size:36px;font-weight:800;color:white;">SP</div>
+      <h2 style="font-size:22px;">SchoolPro</h2>
+      <p style="color:rgba(255,255,255,0.7);">Système de gestion scolaire</p>
+    </div>
+    <div style="padding:24px;">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+        <div style="background:#f8fafc;padding:12px;border-radius:8px;text-align:center;">
+          <div style="font-size:11px;color:#94a3b8;text-transform:uppercase;font-weight:600;">Version</div>
+          <div style="font-size:16px;font-weight:700;color:#0a1628;">2.0.0</div>
+        </div>
+        <div style="background:#f8fafc;padding:12px;border-radius:8px;text-align:center;">
+          <div style="font-size:11px;color:#94a3b8;text-transform:uppercase;font-weight:600;">Élèves</div>
+          <div style="font-size:16px;font-weight:700;color:#0a1628;" id="aboutStudents">248</div>
+        </div>
+        <div style="background:#f8fafc;padding:12px;border-radius:8px;text-align:center;">
+          <div style="font-size:11px;color:#94a3b8;text-transform:uppercase;font-weight:600;">Enseignants</div>
+          <div style="font-size:16px;font-weight:700;color:#0a1628;" id="aboutTeachers">18</div>
+        </div>
+        <div style="background:#f8fafc;padding:12px;border-radius:8px;text-align:center;">
+          <div style="font-size:11px;color:#94a3b8;text-transform:uppercase;font-weight:600;">Classes</div>
+          <div style="font-size:16px;font-weight:700;color:#0a1628;" id="aboutClasses">9</div>
+        </div>
+      </div>
+      <div style="margin-top:16px;padding:12px;background:#f0fdf4;border-radius:8px;text-align:center;font-size:12px;color:#065f46;">
+        <i class="fas fa-code"></i> Développé avec ❤️ pour l'éducation en Haïti
+      </div>
+    </div>
+    <div class="form-actions" style="padding:16px 20px 20px;border-top:1px solid #e2e8f0;display:flex;justify-content:center;">
+      <button class="btn-submit" onclick="closeAboutModal()">Fermer</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL D'IMPORTATION -->
+<div id="importModal" class="modal">
+  <div class="modal-content" style="width:450px; max-width:90%;">
+    <button class="close-modal" onclick="closeImportModal()">&times;</button>
+    <div class="form-header">
+      <h2><i class="fas fa-file-import"></i> Importer des données</h2>
+      <p>Sélectionnez un fichier JSON à importer</p>
+    </div>
+    <div class="step-container" style="padding:20px;">
+      <div class="form-field">
+        <label>Fichier JSON</label>
+        <input type="file" id="importFileInput" accept=".json" style="padding:10px;border:1px solid #e2e8f0;border-radius:8px;width:100%;">
+        <div style="margin-top:8px;font-size:12px;color:#64748b;">
+          <i class="fas fa-info-circle"></i> Les données existantes seront remplacées
+        </div>
+      </div>
+    </div>
+    <div class="form-actions" style="padding:16px 20px 20px;border-top:1px solid #e2e8f0;display:flex;justify-content:flex-end;gap:10px;">
+      <button class="btn-cancel" onclick="closeImportModal()">Annuler</button>
+      <button class="btn-submit" onclick="processImport()"><i class="fas fa-upload"></i> Importer</button>
+    </div>
+  </div>
+</div>
+
+<style>
+/* Styles pour les toggles */
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 48px;
+  height: 26px;
+  cursor: pointer;
+}
+
+.toggle-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.toggle-slider {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #cbd5e1;
+  border-radius: 26px;
+  transition: 0.3s;
+}
+
+.toggle-slider::before {
+  content: '';
+  position: absolute;
+  height: 20px;
+  width: 20px;
+  left: 3px;
+  bottom: 3px;
+  background: white;
+  border-radius: 50%;
+  transition: 0.3s;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+
+.toggle-switch input:checked + .toggle-slider {
+  background: #10b981;
+}
+
+.toggle-switch input:checked + .toggle-slider::before {
+  transform: translateX(22px);
+}
+
+.toggle-switch input:disabled + .toggle-slider {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* MODAL */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  backdrop-filter: blur(4px);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal.active {
+  display: flex;
+}
+
+.modal-content {
+  background: white;
+  border-radius: 20px;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.close-modal {
+  position: absolute;
+  top: 20px;
+  right: 25px;
+  background: none !important;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #94a3b8;
+  z-index: 10;
+  padding: 0;
+}
+
+.close-modal:hover {
+  color: #ef4444 !important;
+  transform: scale(1.1);
+}
+
+.form-header {
+  background: linear-gradient(135deg, #0a1628, #0f2044);
+  color: white;
+  padding: 20px 24px;
+  text-align: center;
+}
+
+.form-header h2 {
+  font-size: 18px;
+  margin-bottom: 4px;
+}
+
+.form-header p {
+  font-size: 12px;
+  color: rgba(255,255,255,0.7);
+}
+
+.form-field label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #1e293b;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  background: white;
+}
+
+.btn-cancel {
+  background: white;
+  border: 1px solid #e2e8f0;
+  color: #64748b;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.btn-cancel:hover {
+  background: #fef2f2;
+  border-color: #ef4444;
+  color: #dc2626;
+}
+
+.btn-submit {
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: white;
+  padding: 8px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 12px;
+  cursor: pointer;
+  border: none;
+}
+
+.btn-submit:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(16,185,129,0.3);
+}
+
+.settings-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.settings-row:last-child {
+  border-bottom: none;
+}
+
+.settings-label {
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.settings-value {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.settings-value .fa-pen {
+  font-size: 13px;
+  padding: 4px;
+  border-radius: 4px;
+  transition: all 0.2s;
+}
+
+.settings-value .fa-pen:hover {
+  background: rgba(16,185,129,0.15);
+  transform: scale(1.1);
+}
+
+.settings-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 24px 28px;
+}
+
+.settings-section {
+  margin-bottom: 28px;
+}
+
+.settings-section:last-child {
+  margin-bottom: 0;
+}
+
+.settings-section h3 {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  color: var(--text-primary);
+}
+
+@media (max-width: 600px) {
+  .settings-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  .settings-value {
+    width: 100%;
+    justify-content: space-between;
+  }
+  .settings-card {
+    padding: 16px;
+  }
+}
+</style>
+

@@ -1,0 +1,184 @@
+<div class="stats-grid">
+  <div class="stat-card green" onclick="showPage('etudiants')">
+    <div class="stat-icon green"><i class="fas fa-users"></i></div>
+    <div class="stat-value">248</div>
+    <div class="stat-label">Élèves inscrits</div>
+    <div class="stat-change up"><i class="fas fa-arrow-up"></i> +12 ce trimestre</div>
+  </div>
+  <div class="stat-card gold" onclick="showPage('enseignants')">
+    <div class="stat-icon gold"><i class="fas fa-chalkboard-user"></i></div>
+    <div class="stat-value">18</div>
+    <div class="stat-label">Enseignants actifs</div>
+    <div class="stat-change up"><i class="fas fa-arrow-up"></i> +2 ce mois</div>
+  </div>
+  <div class="stat-card blue" onclick="showPage('classes')">
+    <div class="stat-icon blue"><i class="fas fa-door-open"></i></div>
+    <div class="stat-value">9</div>
+    <div class="stat-label">Classes ouvertes</div>
+    <div class="stat-change up"><i class="fas fa-check"></i> Toutes actives</div>
+  </div>
+  <div class="stat-card red" onclick="showPage('finance')">
+    <div class="stat-icon red"><i class="fas fa-circle-exclamation"></i></div>
+    <div class="stat-value">34</div>
+    <div class="stat-label">Paiements en retard</div>
+    <div class="stat-change down"><i class="fas fa-arrow-up"></i> +5 vs mois dernier</div>
+  </div>
+</div>
+
+<div class="content-grid">
+  <!-- Carte des derniers élèves inscrits -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-title"><i class="fas fa-users" style="margin-right:8px;color:var(--emerald)"></i>Derniers élèves inscrits</div>
+      <button class="card-action" onclick="showPage('etudiants')">Voir tout →</button>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Élève</th>
+            <th>Classe</th>
+            <th>Statut</th>
+            <th>Paiement</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr onclick="showToast('Fiche élève - Marie Jean', 'info')">
+            <td><div class="td-user"><div class="td-avatar a">MJ</div><div><div class="td-name">Marie Jean</div><div class="td-sub">Inscrite le 05 Jan</div></div></div></td>
+            <td>5e Année A</td>
+            <td><span class="badge green">Actif</span></td>
+            <td><span class="badge green">Payé</span></td>
+          </tr>
+          <tr onclick="showToast('Fiche élève - Pierre Dupont', 'info')">
+            <td><div class="td-user"><div class="td-avatar b">PD</div><div><div class="td-name">Pierre Dupont</div><div class="td-sub">Inscrit le 04 Jan</div></div></div></td>
+            <td>3e Année B</td>
+            <td><span class="badge green">Actif</span></td>
+            <td><span class="badge yellow">Partiel</span></td>
+          </tr>
+          <tr onclick="showToast('Fiche élève - Sophie Louis', 'info')">
+            <td><div class="td-user"><div class="td-avatar c">SL</div><div><div class="td-name">Sophie Louis</div><div class="td-sub">Inscrite le 03 Jan</div></div></div></td>
+            <td>4e Année A</td>
+            <td><span class="badge green">Actif</span></td>
+            <td><span class="badge red">Impayé</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Carte d'activité récente -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-title"><i class="fas fa-bolt" style="margin-right:8px;color:var(--gold)"></i>Activité récente</div>
+    </div>
+    <div class="activity-list">
+      <div class="activity-item" onclick="showToast('Notes du 1er trimestre', 'success')">
+        <div class="act-dot green"></div>
+        <div><div class="act-text">Notes du 1er trimestre saisies — <strong>4e A</strong></div><div class="act-time">Il y a 20 min</div></div>
+      </div>
+      <div class="activity-item" onclick="showToast('Nouvel élève inscrit - Marc Étienne', 'success')">
+        <div class="act-dot blue"></div>
+        <div><div class="act-text">Nouvel élève inscrit — <strong>Marc Étienne</strong></div><div class="act-time">Il y a 1h</div></div>
+      </div>
+      <div class="activity-item" onclick="showToast('Paiement reçu - Sophie Louis', 'success')">
+        <div class="act-dot gold"></div>
+        <div><div class="act-text">Paiement reçu — <strong>Sophie Louis • 5,000 HTG</strong></div><div class="act-time">Il y a 2h</div></div>
+      </div>
+    </div>
+
+    <div class="card-header" style="border-top:1px solid var(--border);border-bottom:none;">
+      <div class="card-title"><i class="fas fa-rocket" style="margin-right:8px;color:var(--info)"></i>Actions rapides</div>
+    </div>
+    <div class="quick-actions">
+      <button class="quick-btn" onclick="showPage('notes')"><i class="fas fa-pen"></i> Saisir notes</button>
+      <button class="quick-btn" onclick="showPage('bulletins')"><i class="fas fa-file-pdf"></i> Générer bulletins</button>
+      <button class="quick-btn" onclick="showPage('absences')"><i class="fas fa-calendar-check"></i> Faire l'appel</button>
+    </div>
+  </div>
+</div>
+
+<!-- Deuxième ligne -->
+<div class="second-row">
+  <!-- Occupation des classes -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-title"><i class="fas fa-door-open" style="margin-right:8px;color:var(--info)"></i>Occupation des classes</div>
+    </div>
+    <div class="prog-list">
+      <div class="prog-item">
+        <div class="prog-header"><span class="prog-label">1ère Année A</span><span class="prog-val">28 / 35</span></div>
+        <div class="prog-bar"><div class="prog-fill" style="width:80%;background:var(--emerald)"></div></div>
+      </div>
+      <div class="prog-item">
+        <div class="prog-header"><span class="prog-label">2e Année A</span><span class="prog-val">32 / 35</span></div>
+        <div class="prog-bar"><div class="prog-fill" style="width:91%;background:var(--emerald)"></div></div>
+      </div>
+      <div class="prog-item">
+        <div class="prog-header"><span class="prog-label">3e Année B</span><span class="prog-val">25 / 35</span></div>
+        <div class="prog-bar"><div class="prog-fill" style="width:71%;background:var(--info)"></div></div>
+      </div>
+      <div class="prog-item">
+        <div class="prog-header"><span class="prog-label">4e Année A</span><span class="prog-val">35 / 35</span></div>
+        <div class="prog-bar"><div class="prog-fill" style="width:100%;background:var(--danger)"></div></div>
+      </div>
+      <div class="prog-item">
+        <div class="prog-header"><span class="prog-label">5e Année A</span><span class="prog-val">29 / 35</span></div>
+        <div class="prog-bar"><div class="prog-fill" style="width:83%;background:var(--emerald)"></div></div>
+      </div>
+      <div class="prog-item">
+        <div class="prog-header"><span class="prog-label">6e Année</span><span class="prog-val">22 / 35</span></div>
+        <div class="prog-bar"><div class="prog-fill" style="width:63%;background:var(--gold)"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Résumé financier -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-title"><i class="fas fa-coins" style="margin-right:8px;color:var(--gold)"></i>Résumé financier — Janvier 2025</div>
+      <button class="card-action" onclick="showPage('finance')">Détails →</button>
+    </div>
+    <div class="finance-summary">
+      <div class="fin-box" onclick="showToast('Total collecté: 285,000 HTG', 'success')">
+        <div class="fin-label">Collecté</div>
+        <div class="fin-value green">285,000 HTG</div>
+      </div>
+      <div class="fin-box" onclick="showToast('Total en attente: 78,500 HTG', 'warning')">
+        <div class="fin-label">En attente</div>
+        <div class="fin-value red">78,500 HTG</div>
+      </div>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Élève</th>
+            <th>Montant</th>
+            <th>Date</th>
+            <th>Statut</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr onclick="showToast('Reçu de paiement - Marie Jean', 'success')">
+            <td><div class="td-user"><div class="td-avatar a">MJ</div><div class="td-name">Marie Jean</div></div></td>
+            <td>2,500 HTG</td>
+            <td>05/01/25</td>
+            <td><span class="badge green">Payé</span></td>
+          </tr>
+          <tr onclick="showToast('Paiement partiel - Pierre Dupont', 'warning')">
+            <td><div class="td-user"><div class="td-avatar b">PD</div><div class="td-name">Pierre Dupont</div></div></td>
+            <td>1,250 HTG</td>
+            <td>04/01/25</td>
+            <td><span class="badge yellow">Partiel</span></td>
+          </tr>
+          <tr onclick="showToast('Paiement impayé - Sophie Louis', 'error')">
+            <td><div class="td-user"><div class="td-avatar c">SL</div><div class="td-name">Sophie Louis</div></div></td>
+            <td>0 HTG</td>
+            <td>—</td>
+            <td><span class="badge red">Impayé</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

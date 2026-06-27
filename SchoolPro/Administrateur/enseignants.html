@@ -1,0 +1,505 @@
+<div class="page-header">
+  <h2><i class="fas fa-chalkboard-user" style="margin-right:10px;color:var(--emerald)"></i>Enseignants</h2>
+  <button class="btn btn-primary" onclick="openTeacherModal()"><i class="fas fa-plus"></i> Nouvel enseignant</button>
+</div>
+
+<div class="teachers-grid">
+  <div class="teacher-card" onclick="showToast('Fiche Marie Claudel', 'info')">
+    <div class="teacher-avatar">MC</div>
+    <div class="teacher-info">
+      <h4>Marie Claudel</h4>
+      <div class="teacher-subject">Mathématiques</div>
+      <div class="teacher-contact"><i class="far fa-envelope"></i> marie.c@schoolpro.ht</div>
+    </div>
+  </div>
+  <div class="teacher-card" onclick="showToast('Fiche Jean Dorval', 'info')">
+    <div class="teacher-avatar">JD</div>
+    <div class="teacher-info">
+      <h4>Jean Dorval</h4>
+      <div class="teacher-subject">Français</div>
+      <div class="teacher-contact"><i class="far fa-envelope"></i> jean.d@schoolpro.ht</div>
+    </div>
+  </div>
+  <div class="teacher-card" onclick="showToast('Fiche Sophie Baptiste', 'info')">
+    <div class="teacher-avatar">SB</div>
+    <div class="teacher-info">
+      <h4>Sophie Baptiste</h4>
+      <div class="teacher-subject">Sciences</div>
+      <div class="teacher-contact"><i class="far fa-envelope"></i> sophie.b@schoolpro.ht</div>
+    </div>
+  </div>
+  <div class="teacher-card" onclick="showToast('Fiche Louis Michel', 'info')">
+    <div class="teacher-avatar">LM</div>
+    <div class="teacher-info">
+      <h4>Louis Michel</h4>
+      <div class="teacher-subject">Histoire</div>
+      <div class="teacher-contact"><i class="far fa-envelope"></i> louis.m@schoolpro.ht</div>
+    </div>
+  </div>
+  <div class="teacher-card" onclick="showToast('Fiche Catherine Paul', 'info')">
+    <div class="teacher-avatar">CP</div>
+    <div class="teacher-info">
+      <h4>Catherine Paul</h4>
+      <div class="teacher-subject">Anglais</div>
+      <div class="teacher-contact"><i class="far fa-envelope"></i> catherine.p@schoolpro.ht</div>
+    </div>
+  </div>
+  <div class="teacher-card" onclick="showToast('Fiche Antoine Dubois', 'info')">
+    <div class="teacher-avatar">AD</div>
+    <div class="teacher-info">
+      <h4>Antoine Dubois</h4>
+      <div class="teacher-subject">EPS</div>
+      <div class="teacher-contact"><i class="far fa-envelope"></i> antoine.d@schoolpro.ht</div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL AJOUT ENSEIGNANT - 2 ÉTAPES -->
+<div id="teacherModal" class="modal">
+  <div class="modal-content">
+    <button class="close-modal" onclick="closeTeacherModal()">&times;</button>
+    <div class="form-header">
+      <h2><i class="fas fa-chalkboard-user"></i> Ajouter un enseignant</h2>
+      <p>Remplissez les informations ci-dessous</p>
+    </div>
+
+    <div class="step-indicator">
+      <div class="step active" id="teacherStep1Indicator">
+        <div class="step-number"><span>1</span></div>
+        <div class="step-label">Informations personnelles</div>
+        <div class="step-line"></div>
+      </div>
+      <div class="step" id="teacherStep2Indicator">
+        <div class="step-number"><span>2</span></div>
+        <div class="step-label">Informations professionnelles</div>
+        <div class="step-line"></div>
+      </div>
+    </div>
+
+    <div class="step-container">
+      <!-- Étape 1 : Informations personnelles -->
+      <div class="step-content active" id="teacherStep1">
+        <div class="form-row">
+          <div class="form-field">
+            <label><i class="fas fa-user"></i> Prénom <span style="color:#ef4444">*</span></label>
+            <input type="text" id="teacherPrenom" placeholder="Ex: Marie">
+          </div>
+          <div class="form-field">
+            <label><i class="fas fa-user"></i> Nom <span style="color:#ef4444">*</span></label>
+            <input type="text" id="teacherNom" placeholder="Ex: Claudel">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-field">
+            <label><i class="fas fa-envelope"></i> Email <span style="color:#ef4444">*</span></label>
+            <input type="email" id="teacherEmail" placeholder="email@ecole.com">
+          </div>
+          <div class="form-field">
+            <label><i class="fas fa-phone"></i> Téléphone</label>
+            <input type="tel" id="teacherTel" placeholder="+509 0000-0000">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-field">
+            <label><i class="fas fa-camera"></i> Photo</label>
+            <input type="file" id="teacherPhoto" accept="image/*" onchange="previewTeacherPhoto(this)">
+            <div class="photo-preview" id="teacherPhotoPreview"><i class="fas fa-user"></i></div>
+          </div>
+          <div class="form-field">
+            <label><i class="fas fa-map-marker-alt"></i> Adresse</label>
+            <input type="text" id="teacherAdresse" placeholder="Adresse complète">
+          </div>
+        </div>
+      </div>
+
+      <!-- Étape 2 : Informations professionnelles -->
+      <div class="step-content" id="teacherStep2">
+        <div class="form-row">
+          <div class="form-field">
+            <label><i class="fas fa-book"></i> Matière enseignée <span style="color:#ef4444">*</span></label>
+            <input type="text" id="teacherMatiere" placeholder="Ex: Mathématiques">
+          </div>
+          <div class="form-field">
+            <label><i class="fas fa-graduation-cap"></i> Diplôme</label>
+            <input type="text" id="teacherDiplome" placeholder="Ex: Master en Mathématiques">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-field">
+            <label><i class="fas fa-calendar-alt"></i> Date d'embauche</label>
+            <input type="date" id="teacherDateEmbauche">
+          </div>
+          <div class="form-field">
+            <label><i class="fas fa-clock"></i> Statut</label>
+            <select id="teacherStatut">
+              <option value="Permanent">Permanent</option>
+              <option value="Contractuel">Contractuel</option>
+              <option value="Vacataire">Vacataire</option>
+              <option value="Stagiaire">Stagiaire</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-field">
+            <label><i class="fas fa-chalkboard"></i> Spécialités</label>
+            <input type="text" id="teacherSpecialites" placeholder="Ex: Algèbre, Géométrie">
+          </div>
+          <div class="form-field">
+            <label><i class="fas fa-language"></i> Langues parlées</label>
+            <input type="text" id="teacherLangues" placeholder="Ex: Français, Créole, Anglais">
+          </div>
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button type="button" class="btn-cancel" onclick="cancelTeacherForm()">Annuler</button>
+        <div style="display: flex; gap: 10px;">
+          <button type="button" class="btn-prev" id="teacherPrevBtn" onclick="teacherPrevStep()" style="display: none;">Précédent</button>
+          <button type="button" class="btn-next" id="teacherNextBtn" onclick="teacherNextStep()">Suivant</button>
+          <button type="button" class="btn-submit" id="teacherSubmitBtn" onclick="submitTeacherForm()" style="display: none;">Enregistrer</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+/* MODAL STYLES */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal.active {
+  display: flex;
+}
+
+.modal-content {
+  background: white;
+  border-radius: 20px;
+  width: 580px;
+  max-width: 90%;
+  max-height: 90vh;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+/* SEUL LE BOUTON CLOSE EST MODIFIÉ - Sans cercle comme les autres modals */
+.close-modal {
+  position: absolute;
+  top: 20px;
+  right: 25px;
+  background: none !important;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #94a3b8;
+  width: auto;
+  height: auto;
+  border-radius: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  padding: 0;
+  box-shadow: none;
+}
+
+.close-modal:hover {
+  color: #ef4444 !important;
+  background: none !important;
+  transform: scale(1.1);
+}
+
+/* Le reste du CSS reste identique */
+.form-header {
+  background: linear-gradient(135deg, #0a1628, #0f2044);
+  color: white;
+  padding: 20px 24px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.form-header h2 {
+  font-size: 18px;
+  margin-bottom: 4px;
+}
+
+.form-header p {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.step-indicator {
+  display: flex;
+  padding: 16px 24px 0;
+  background: white;
+  border-bottom: 1px solid #e2e8f0;
+  flex-shrink: 0;
+}
+
+.step {
+  flex: 1;
+  text-align: center;
+  position: relative;
+}
+
+.step-number {
+  width: 28px;
+  height: 28px;
+  background: #e2e8f0;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 12px;
+  color: #64748b;
+  transition: all 0.3s;
+  margin-bottom: 4px;
+}
+
+.step-label {
+  font-size: 10px;
+  font-weight: 600;
+  color: #64748b;
+}
+
+.step.active .step-number {
+  background: #10b981;
+  color: white;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
+}
+
+.step.completed .step-number {
+  background: #10b981;
+  color: white;
+}
+
+.step.active .step-label {
+  color: #10b981;
+}
+
+.step-line {
+  position: absolute;
+  top: 14px;
+  left: 50%;
+  width: 100%;
+  height: 2px;
+  background: #e2e8f0;
+  z-index: 0;
+}
+
+.step:last-child .step-line {
+  display: none;
+}
+
+.step.active .step-line,
+.step.completed .step-line {
+  background: #10b981;
+}
+
+.step-container {
+  padding: 20px 24px;
+  flex: 1;
+  overflow-y: auto;
+}
+
+.step-content {
+  display: none;
+  animation: fadeSlide 0.3s ease;
+}
+
+.step-content.active {
+  display: block;
+}
+
+@keyframes fadeSlide {
+  from {
+    opacity: 0;
+    transform: translateX(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.form-row {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.form-field {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.form-field label {
+  font-size: 11px;
+  font-weight: 600;
+  color: #1e293b;
+}
+
+.form-field label i {
+  margin-right: 4px;
+  color: #10b981;
+  font-size: 10px;
+}
+
+.form-field label span {
+  color: #ef4444;
+}
+
+.form-field input,
+.form-field select {
+  padding: 8px 10px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 12px;
+  font-family: 'Inter', sans-serif;
+  background: #f8fafc;
+}
+
+.form-field input:focus,
+.form-field select:focus {
+  outline: none;
+  border-color: #10b981;
+  background: white;
+}
+
+.photo-preview {
+  margin-top: 4px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #f1f5f9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border: 1px solid #e2e8f0;
+}
+
+.photo-preview i {
+  font-size: 16px;
+  color: #94a3b8;
+}
+
+.photo-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 16px 24px 20px;
+  border-top: 1px solid #e2e8f0;
+  background: white;
+  flex-shrink: 0;
+}
+
+.btn-prev {
+  background: #f1f5f9;
+  color: #475569;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 12px;
+  cursor: pointer;
+  border: none;
+}
+
+.btn-prev:hover {
+  background: #e2e8f0;
+}
+
+.btn-next {
+  background: #10b981;
+  color: white;
+  padding: 8px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 12px;
+  cursor: pointer;
+  border: none;
+}
+
+.btn-next:hover {
+  background: #059669;
+}
+
+.btn-submit {
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: white;
+  padding: 8px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 12px;
+  cursor: pointer;
+  border: none;
+}
+
+.btn-submit:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
+}
+
+.btn-cancel {
+  background: white;
+  border: 1px solid #e2e8f0;
+  color: #64748b;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.btn-cancel:hover {
+  background: #fef2f2;
+  border-color: #ef4444;
+  color: #dc2626;
+}
+
+@media (max-width: 560px) {
+  .form-row {
+    flex-direction: column;
+    gap: 10px;
+  }
+  .step-label {
+    font-size: 8px;
+  }
+  .step-number {
+    width: 24px;
+    height: 24px;
+    font-size: 10px;
+  }
+  .step-container {
+    padding: 16px;
+  }
+  .form-actions {
+    padding: 12px 16px;
+  }
+  .page-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+</style>

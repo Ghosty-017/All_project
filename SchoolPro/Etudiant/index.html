@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SchoolPro Élève — Tableau de bord</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link rel="stylesheet" href="style-etudiant.css" />
+</head>
+<body>
+
+    <!-- ==================== SIDEBAR ==================== -->
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebar-logo">
+            <div class="logo-mark">
+                <div class="logo-icon">SP</div>
+                <div>
+                    <div class="logo-text">SchoolPro</div>
+                    <div class="logo-sub">Espace Élève</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="student-badge">
+            <div class="student-avatar" id="sidebarAvatar">MJ</div>
+            <div>
+                <p class="student-name" id="sidebarName">Marie Jean</p>
+                <p class="student-classe" id="sidebarClasse">5e Année A</p>
+            </div>
+        </div>
+
+        <div class="sidebar-nav-wrapper">
+            <div class="sidebar-nav">
+                <div class="nav-section-label">Principal</div>
+                <button class="nav-item active" onclick="showPage('dashboard')" data-page="dashboard">
+                    <span class="nav-icon"><i class="fas fa-chart-pie"></i></span>Tableau de bord
+                </button>
+
+                <div class="nav-section-label">Académique</div>
+                <button class="nav-item" onclick="showPage('notes')" data-page="notes">
+                    <span class="nav-icon"><i class="fas fa-graduation-cap"></i></span>Mes notes
+                    <span class="nav-badge" id="notesBadge">6</span>
+                </button>
+                <button class="nav-item" onclick="showPage('bulletins')" data-page="bulletins">
+                    <span class="nav-icon"><i class="fas fa-file-lines"></i></span>Bulletins
+                    <span class="nav-badge" id="bulletinsBadge">3</span>
+                </button>
+                <button class="nav-item" onclick="showPage('emploi')" data-page="emploi">
+                    <span class="nav-icon"><i class="fas fa-clock"></i></span>Emploi du temps
+                </button>
+
+                <div class="nav-section-label">Suivi</div>
+                <button class="nav-item" onclick="showPage('presences')" data-page="presences">
+                    <span class="nav-icon"><i class="fas fa-calendar-check"></i></span>Mes présences
+                    <span class="nav-badge" id="presencesBadge">3 abs.</span>
+                </button>
+                <button class="nav-item" onclick="showPage('professeurs')" data-page="professeurs">
+                    <span class="nav-icon"><i class="fas fa-chalkboard-user"></i></span>Mes professeurs
+                </button>
+
+                <div class="nav-section-label">Ressources</div>
+                <button class="nav-item" onclick="showPage('bibliotheque')" data-page="bibliotheque">
+                    <span class="nav-icon"><i class="fas fa-book"></i></span>Bibliothèque
+                    <span class="nav-badge green" id="bibliothequeBadge">12</span>
+                </button>
+
+                <div class="nav-section-label">Informations</div>
+                <button class="nav-item" onclick="showPage('profil')" data-page="profil">
+                    <span class="nav-icon"><i class="fas fa-user"></i></span>Mon profil
+                </button>
+                <button class="nav-item" onclick="showPage('parametres')" data-page="parametres">
+                    <span class="nav-icon"><i class="fas fa-sliders"></i></span>Paramètres
+                </button>
+            </div>
+        </div>
+
+        <div class="sidebar-footer">
+            <div class="user-info" onclick="showToast('Déconnexion', 'info')">
+                      
+                <div class="avatar">MJ</div>
+                <div>
+                    <div class="user-name">Marie Jean</div>
+                    <div class="user-role">Élève</div>
+                </div>
+               <i class="fas fa-sign-out-alt" style="margin-left:auto;font-size:16px;color:var(--text-muted);cursor:pointer;" onclick="event.stopPropagation();logout();" title="Déconnexion"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ==================== MAIN ==================== -->
+    <div class="main">
+        <!-- HEADER -->
+        <header class="header">
+            <div class="header-title" id="page-title">
+                Tableau de bord <span>Bienvenue Marie !</span>
+            </div>
+            <div class="search-bar" onclick="openSearch()">
+                <i class="fas fa-search"></i>
+                <span>Rechercher...</span>
+            </div>
+            <div class="header-actions">
+                <div class="year-chip" onclick="showToast('Année scolaire 2024-2025', 'info')">2024 — 2025</div>
+                <button class="icon-btn" onclick="showNotifications()">
+                    <i class="fas fa-bell"></i>
+                    <span class="notif-dot"></span>
+                </button>
+                <button class="icon-btn" onclick="showHelp()">
+                    <i class="fas fa-question"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- PAGES -->
+        <div id="page-dashboard" class="page active"></div>
+        <div id="page-notes" class="page"></div>
+        <div id="page-bulletins" class="page"></div>
+        <div id="page-emploi" class="page"></div>
+        <div id="page-presences" class="page"></div>
+        <div id="page-professeurs" class="page"></div>
+        <div id="page-bibliotheque" class="page"></div>
+        <div id="page-profil" class="page"></div>
+        <div id="page-parametres" class="page"></div>
+    </div>
+
+    <!-- TOAST -->
+    <div id="toast" class="toast">
+        <i class="fas fa-circle-check"></i>
+        <span id="toastMsg"></span>
+    </div>
+
+    <!-- ==================== MODAL LECTEUR PDF ==================== -->
+    <div id="pdfModal" class="modal" onclick="if(event.target===this) closePdfModal()">
+        <div class="modal-content modal-pdf">
+            <div class="modal-header">
+                <h2 id="pdfModalTitle">Titre du livre</h2>
+                <p id="pdfModalAuthor">Auteur</p>
+                <button class="modal-close" onclick="closePdfModal()">&times;</button>
+            </div>
+            <div class="modal-body pdf-viewer">
+                <div class="pdf-placeholder" id="pdfPlaceholder">
+                    <i class="fas fa-file-pdf" style="font-size:64px;color:var(--danger);"></i>
+                    <p style="margin-top:16px;font-size:16px;font-weight:600;">Aperçu PDF</p>
+                    <p style="color:var(--text-muted);font-size:13px;">Le PDF s'affichera ici</p>
+                    <button class="btn btn-primary" onclick="showToast('Téléchargement du PDF démarré', 'success')">
+                        <i class="fas fa-download"></i> Télécharger le PDF
+                    </button>
+                </div>
+                <div id="pdfIframeContainer" style="display:none;width:100%;height:500px;">
+                    <iframe id="pdfIframe" src="" style="width:100%;height:100%;border:none;"></iframe>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" onclick="closePdfModal()">Fermer</button>
+                <button class="btn btn-primary" onclick="showToast('Téléchargement du PDF démarré', 'success')">
+                    <i class="fas fa-download"></i> Télécharger
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== SCRIPTS ==================== -->
+    <script src="script-etudiant.js"></script>
+</body>
+</html>

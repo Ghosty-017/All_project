@@ -1,0 +1,59 @@
+<div class="page-header">
+    <h2><i class="fas fa-graduation-cap" style="margin-right:10px;color:var(--emerald)"></i>Mes notes</h2>
+    <div style="display:flex;gap:10px;align-items:center;">
+        <span class="badge green" style="padding:6px 14px;font-size:13px;">
+            <i class="fas fa-calculator"></i> Moyenne générale : <span id="moyenneGenerale">83</span>/100
+        </span>
+        <select class="filter-select" id="notesFilter" onchange="filterNotes(this.value)">
+            <option value="all">Toutes les matières</option>
+            <option value="Mathématiques">Mathématiques</option>
+            <option value="Français">Français</option>
+            <option value="Sciences">Sciences</option>
+            <option value="Anglais">Anglais</option>
+            <option value="Histoire">Histoire</option>
+            <option value="Créole">Créole</option>
+        </select>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-header">
+        <div class="card-title"><i class="fas fa-chart-simple" style="margin-right:8px;color:var(--emerald)"></i>Relevé de notes</div>
+        <button class="card-action" onclick="showToast('Export PDF', 'success')"><i class="fas fa-download"></i> Exporter PDF</button>
+    </div>
+    <div class="table-wrap">
+        <table>
+            <thead>
+                <tr>
+                    <th>Matière</th>
+                    <th>Coeff.</th>
+                    <th>Interro 1</th>
+                    <th>Interro 2</th>
+                    <th>Examen</th>
+                    <th>Moyenne</th>
+                    <th>Appréciation</th>
+                </tr>
+            </thead>
+            <tbody id="notesTableBody">
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div style="margin-top:20px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;">
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px;text-align:center;">
+        <div style="font-size:11px;color:var(--text-muted);text-transform:uppercase;font-weight:600;">Meilleure note</div>
+        <div style="font-size:24px;font-weight:700;color:var(--emerald);" id="meilleureNote">95/100</div>
+        <div style="font-size:12px;color:var(--text-secondary);" id="meilleureNoteMatiere">Créole</div>
+    </div>
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px;text-align:center;">
+        <div style="font-size:11px;color:var(--text-muted);text-transform:uppercase;font-weight:600;">Plus faible note</div>
+        <div style="font-size:24px;font-weight:700;color:var(--danger);" id="plusFaibleNote">79/100</div>
+        <div style="font-size:12px;color:var(--text-secondary);" id="plusFaibleNoteMatiere">Français</div>
+    </div>
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px;text-align:center;">
+        <div style="font-size:11px;color:var(--text-muted);text-transform:uppercase;font-weight:600;">Moyenne générale</div>
+        <div style="font-size:24px;font-weight:700;color:var(--gold);" id="moyenneGeneraleCard">83/100</div>
+        <div style="font-size:12px;color:var(--text-secondary);" id="appreciationGenerale">Bien</div>
+    </div>
+</div>

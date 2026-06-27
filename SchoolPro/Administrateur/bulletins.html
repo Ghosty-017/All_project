@@ -1,0 +1,35 @@
+<div class="page-header">
+  <h2><i class="fas fa-file-lines" style="margin-right:10px;color:var(--emerald)"></i>Bulletins scolaires</h2>
+  <div><select class="filter-select"><option>5e Année A</option></select><button class="btn btn-primary" onclick="showToast('Bulletin exporté en PDF', 'success')"><i class="fas fa-download"></i> Exporter PDF</button></div>
+</div>
+
+<div class="bulletin-card">
+  <div class="bulletin-header">
+    <div>
+      <div class="bulletin-school">Collège Saint-Louis • Port-au-Prince, Haïti</div>
+      <div class="bulletin-title">Bulletin de notes</div>
+      <div class="bulletin-period">1er Trimestre — Année scolaire 2024–2025</div>
+    </div>
+    <div><div style="font-size:11px;color:rgba(255,255,255,0.4);margin-bottom:4px">Édité le</div><div style="font-weight:600;color:var(--emerald-light)">05 Janvier 2025</div></div>
+  </div>
+  <div class="bulletin-info">
+    <div><div class="bul-info-label">Élève</div><div class="bul-info-value">Marie Jean</div></div>
+    <div><div class="bul-info-label">Classe</div><div class="bul-info-value">5e Année A</div></div>
+    <div><div class="bul-info-label">N° Matricule</div><div class="bul-info-value">2024-001</div></div>
+  </div>
+  <div class="table-wrap">
+    <table class="bulletin-table">
+      <thead><tr><th>Matière</th><th>Coeff.</th><th>Interro 1</th><th>Interro 2</th><th>Examen</th><th>Moyenne</th><th>Mention</th></tr></thead>
+      <tbody>
+        <tr onclick="showToast('Détails Mathématiques', 'info')"><td style="font-weight:600">Mathématiques</td><td>4</td><td>82</td><td>78</td><td>85</td><td class="note-cell good">82</td><td><span class="badge green">Bien</span></td></tr>
+        <tr onclick="showToast('Détails Français', 'info')"><td style="font-weight:600">Français</td><td>4</td><td>75</td><td>80</td><td>78</td><td class="note-cell good">78</td><td><span class="badge green">Assez Bien</span></td></tr>
+        <tr onclick="showToast('Détails Créole', 'info')"><td style="font-weight:600">Créole</td><td>2</td><td>90</td><td>88</td><td>92</td><td class="note-cell good">90</td><td><span class="badge green">Très Bien</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="bul-footer">
+    <div class="bul-result-box"><div class="bul-result-label">Moyenne générale</div><div class="bul-result-value">78.5 / 100</div></div>
+    <div class="bul-result-box"><div class="bul-result-label">Rang dans la classe</div><div class="bul-result-value">3 / 28</div></div>
+    <div class="bul-result-box"><div class="bul-result-label">Mention globale</div><div class="bul-result-value">BIEN</div></div>
+  </div>
+</div>

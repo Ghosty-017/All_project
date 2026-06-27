@@ -1,0 +1,82 @@
+<div class="stats-grid">
+    <div class="stat-card green" onclick="showToast('Votre moyenne générale', 'info')">
+        <div class="stat-icon green"><i class="fas fa-graduation-cap"></i></div>
+        <div class="stat-value" id="statMoyenne">83</div>
+        <div class="stat-label">Moyenne générale</div>
+        <div class="stat-change up"><i class="fas fa-arrow-up"></i> +2.5%</div>
+    </div>
+    <div class="stat-card blue" onclick="showToast('Vos matières', 'info')">
+        <div class="stat-icon blue"><i class="fas fa-book"></i></div>
+        <div class="stat-value" id="statMatieres">6</div>
+        <div class="stat-label">Matières suivies</div>
+        <div class="stat-change up"><i class="fas fa-check"></i> Toutes validées</div>
+    </div>
+    <div class="stat-card gold" onclick="showToast('Votre classe', 'info')">
+        <div class="stat-icon gold"><i class="fas fa-door-open"></i></div>
+        <div class="stat-value" id="statClasse">5e Année A</div>
+        <div class="stat-label">Classe</div>
+        <div class="stat-change up"><i class="fas fa-users"></i> 28 élèves</div>
+    </div>
+    <div class="stat-card red" onclick="showToast('Vos absences', 'info')">
+        <div class="stat-icon red"><i class="fas fa-calendar-xmark"></i></div>
+        <div class="stat-value" id="statAbsences">3</div>
+        <div class="stat-label">Absences</div>
+        <div class="stat-change up" id="statTauxPresence">
+            <i class="fas fa-arrow-up"></i> 80% de présence
+        </div>
+    </div>
+</div>
+
+<div class="content-grid">
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title"><i class="fas fa-chart-simple" style="margin-right:8px;color:var(--emerald)"></i>Mes notes par matière</div>
+            <button class="card-action" onclick="showPage('notes')">Voir tout →</button>
+        </div>
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Matière</th>
+                        <th>Interro 1</th>
+                        <th>Interro 2</th>
+                        <th>Examen</th>
+                        <th>Moyenne</th>
+                        <th>Appréciation</th>
+                    </tr>
+                </thead>
+                <tbody id="dashboardNotesTable">
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title"><i class="fas fa-clock" style="margin-right:8px;color:var(--gold)"></i>Mon emploi du temps</div>
+            <button class="card-action" onclick="showPage('emploi')">Voir tout →</button>
+        </div>
+        <div class="activity-list" id="dashboardSchedule">
+        </div>
+    </div>
+</div>
+
+<div class="second-row">
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title"><i class="fas fa-chalkboard-user" style="margin-right:8px;color:var(--info)"></i>Mes professeurs</div>
+            <button class="card-action" onclick="showPage('professeurs')">Voir tout →</button>
+        </div>
+        <div style="padding:12px 16px;" id="dashboardTeachers">
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title"><i class="fas fa-file-lines" style="margin-right:8px;color:var(--emerald)"></i>Mes bulletins</div>
+            <button class="card-action" onclick="showPage('bulletins')">Voir tout →</button>
+        </div>
+        <div class="bulletin-preview" id="dashboardBulletins">
+        </div>
+    </div>
+</div>

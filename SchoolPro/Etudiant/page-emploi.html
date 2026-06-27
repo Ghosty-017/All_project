@@ -1,0 +1,84 @@
+<div class="page-header">
+    <h2><i class="fas fa-clock" style="margin-right:10px;color:var(--emerald)"></i>Mon emploi du temps</h2>
+    <div>
+        <button class="btn btn-outline" onclick="showToast('Emploi du temps exporté', 'success')"><i class="fas fa-download"></i> Exporter</button>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-header">
+        <div class="card-title"><i class="fas fa-calendar-week" style="margin-right:8px;color:var(--gold)"></i>Semaine du <span id="semaineDate">lundi 19 juin 2026</span></div>
+    </div>
+    <div class="schedule-grid" id="scheduleGrid">
+        <!-- Lundi -->
+        <div class="schedule-day">
+            <div class="day-title">Lundi</div>
+            <div class="schedule-course" onclick="showToast('Cours de Mathématiques', 'info')">
+                <div class="course-name">Mathématiques</div>
+                <div class="course-time">08:00 - 10:00</div>
+                <div class="course-room">Salle 101 · Marie Claudel</div>
+            </div>
+            <div class="schedule-course" onclick="showToast('Cours de Français', 'info')">
+                <div class="course-name">Français</div>
+                <div class="course-time">10:00 - 12:00</div>
+                <div class="course-room">Salle 102 · Jean Dorval</div>
+            </div>
+        </div>
+        <!-- Mardi -->
+        <div class="schedule-day">
+            <div class="day-title">Mardi</div>
+            <div class="schedule-course" onclick="showToast('Cours de Sciences', 'info')">
+                <div class="course-name">Sciences</div>
+                <div class="course-time">08:00 - 10:00</div>
+                <div class="course-room">Salle 103 · Sophie Baptiste</div>
+            </div>
+            <div class="schedule-course" onclick="showToast('Cours d\'Anglais', 'info')">
+                <div class="course-name">Anglais</div>
+                <div class="course-time">10:00 - 12:00</div>
+                <div class="course-room">Salle 104 · Catherine Paul</div>
+            </div>
+        </div>
+        <!-- Mercredi -->
+        <div class="schedule-day">
+            <div class="day-title">Mercredi</div>
+            <div class="schedule-course" onclick="showToast('Cours de Mathématiques', 'info')">
+                <div class="course-name">Mathématiques</div>
+                <div class="course-time">08:00 - 10:00</div>
+                <div class="course-room">Salle 101 · Marie Claudel</div>
+            </div>
+            <div class="schedule-course" onclick="showToast('Cours d\'Histoire', 'info')">
+                <div class="course-name">Histoire</div>
+                <div class="course-time">10:00 - 12:00</div>
+                <div class="course-room">Salle 105 · Louis Michel</div>
+            </div>
+        </div>
+        <!-- Jeudi -->
+        <div class="schedule-day">
+            <div class="day-title">Jeudi</div>
+            <div class="schedule-course" onclick="showToast('Cours de Français', 'info')">
+                <div class="course-name">Français</div>
+                <div class="course-time">08:00 - 10:00</div>
+                <div class="course-room">Salle 102 · Jean Dorval</div>
+            </div>
+            <div class="schedule-course" onclick="showToast('Cours de Sciences', 'info')">
+                <div class="course-name">Sciences</div>
+                <div class="course-time">10:00 - 12:00</div>
+                <div class="course-room">Salle 103 · Sophie Baptiste</div>
+            </div>
+        </div>
+        <!-- Vendredi -->
+        <div class="schedule-day">
+            <div class="day-title">Vendredi</div>
+            <div class="schedule-course" onclick="showToast('Cours de Créole', 'info')">
+                <div class="course-name">Créole</div>
+                <div class="course-time">08:00 - 10:00</div>
+                <div class="course-room">Salle 106 · Catherine Paul</div>
+            </div>
+            <div class="schedule-course" onclick="showToast('Cours d\'Anglais', 'info')">
+                <div class="course-name">Anglais</div>
+                <div class="course-time">10:00 - 12:00</div>
+                <div class="course-room">Salle 104 · Catherine Paul</div>
+            </div>
+        </div>
+    </div>
+</div>

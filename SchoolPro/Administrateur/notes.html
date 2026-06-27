@@ -1,0 +1,408 @@
+<div class="page-header">
+  <h2><i class="fas fa-pen-to-square" style="margin-right:10px;color:var(--emerald)"></i>Saisie des notes</h2>
+  <div style="display: flex; gap: 10px;">
+    <select class="filter-select" id="trimestreSelect" onchange="changeTrimestre()">
+      <option value="1">1er Trimestre</option>
+      <option value="2">2e Trimestre</option>
+      <option value="3">3e Trimestre</option>
+    </select>
+    <button class="btn btn-primary" onclick="saveNotes()"><i class="fas fa-save"></i> Enregistrer</button>
+  </div>
+</div>
+
+<div class="notes-grid">
+  <div class="card card-classe">
+    <div class="card-header"><div class="card-title">Classes</div></div>
+    <div class="classe-list" id="classeList">
+      <div class="classe-item active" data-classe="5e Année A" onclick="selectClasse(this, '5e Année A')">
+        <div><div class="classe-name">5e Année A</div><div class="classe-count">28 élèves</div></div>
+        <span class="badge green" id="badge-5e-annee-a">Saisi</span>
+      </div>
+      <div class="classe-item" data-classe="5e Année B" onclick="selectClasse(this, '5e Année B')">
+        <div><div class="classe-name">5e Année B</div><div class="classe-count">30 élèves</div></div>
+        <span class="badge yellow" id="badge-5e-annee-b">Partiel</span>
+      </div>
+      <div class="classe-item" data-classe="4e Année A" onclick="selectClasse(this, '4e Année A')">
+        <div><div class="classe-name">4e Année A</div><div class="classe-count">35 élèves</div></div>
+        <span class="badge red" id="badge-4e-annee-a">Vide</span>
+      </div>
+      <div class="classe-item" data-classe="3e Année B" onclick="selectClasse(this, '3e Année B')">
+        <div><div class="classe-name">3e Année B</div><div class="classe-count">25 élèves</div></div>
+        <span class="badge yellow" id="badge-3e-annee-b">Partiel</span>
+      </div>
+      <div class="classe-item" data-classe="6e Année" onclick="selectClasse(this, '6e Année')">
+        <div><div class="classe-name">6e Année</div><div class="classe-count">22 élèves</div></div>
+        <span class="badge red" id="badge-6e-annee">Vide</span>
+      </div>
+    </div>
+  </div>
+  
+  <div class="card card-notes">
+    <div class="card-header">
+      <div class="card-title" id="classeTitle">5e Année A — Notes par matière</div>
+      <select class="filter-select" id="matiereSelect" onchange="changeMatiere()">
+        <option value="">Aucun</option>
+        <option value="Mathematiques" selected>Mathématiques</option>
+        <option value="Francais">Français</option>
+        <option value="Sciences">Sciences</option>
+        <option value="Anglais">Anglais</option>
+        <option value="Histoire">Histoire</option>
+        <option value="Créole">Créole</option>
+      </select>
+    </div>
+    <div class="notes-table-wrap" id="notesTableContainer">
+      <table id="notesTable">
+        <thead>
+          <tr>
+            <th>Élève</th>
+            <th>Interro 1</th>
+            <th>Interro 2</th>
+            <th>Examen</th>
+            <th>Moyenne</th>
+          </tr>
+        </thead>
+        <tbody id="notesTableBody">
+          <!-- Les données seront chargées dynamiquement -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL PAIEMENT -->
+<div id="paymentModal" class="modal">
+  <div class="modal-content" style="max-width:450px;">
+    <button class="close-modal" onclick="closePaymentModal()">&times;</button>
+    <div class="form-header">
+      <h2><i class="fas fa-money-bill"></i> Encaisser un paiement</h2>
+      <p>Enregistrez un paiement pour l'élève</p>
+    </div>
+    <div class="step-container" style="padding:20px;">
+      <div style="margin-bottom:16px;background:#f8fafc;padding:12px;border-radius:10px;">
+        <div><strong>Élève :</strong> <span id="paymentStudentName">—</span></div>
+        <div><strong>Classe :</strong> <span id="paymentStudentClasse">—</span></div>
+      </div>
+      <input type="hidden" id="paymentEleveId">
+      <div class="form-field" style="margin-bottom:12px;">
+        <label><i class="fas fa-money-bill"></i> Montant (HTG)</label>
+        <input type="number" id="paymentAmount" placeholder="Ex: 2500" min="1" style="padding:10px;border:1px solid #e2e8f0;border-radius:8px;width:100%;">
+      </div>
+      <div class="form-field" style="margin-bottom:12px;">
+        <label><i class="fas fa-calendar"></i> Date</label>
+        <input type="date" id="paymentDate" value="2025-01-05" style="padding:10px;border:1px solid #e2e8f0;border-radius:8px;width:100%;">
+      </div>
+    </div>
+    <div class="form-actions" style="padding:16px 20px 20px;border-top:1px solid #e2e8f0;display:flex;justify-content:flex-end;gap:10px;">
+      <button class="btn-cancel" onclick="closePaymentModal()">Annuler</button>
+      <button class="btn-submit" onclick="processPayment()"><i class="fas fa-check"></i> Enregistrer</button>
+    </div>
+  </div>
+</div>
+
+<style>
+.notes-grid {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 20px;
+  align-items: start;
+}
+
+.card-classe {
+  height: fit-content;
+  max-height: 500px;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-classe .card-header {
+  flex-shrink: 0;
+}
+
+.classe-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  overflow-y: auto;
+  padding: 12px;
+  flex: 1;
+}
+
+.classe-list::-webkit-scrollbar {
+  width: 4px;
+}
+.classe-list::-webkit-scrollbar-track {
+  background: #f1f5f9;
+  border-radius: 10px;
+}
+.classe-list::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 10px;
+}
+.classe-list::-webkit-scrollbar-thumb:hover {
+  background: #10b981;
+}
+
+.card-notes {
+  height: fit-content;
+  max-height: 500px;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-notes .card-header {
+  flex-shrink: 0;
+}
+
+.notes-table-wrap {
+  overflow-y: auto;
+  flex: 1;
+}
+
+.notes-table-wrap::-webkit-scrollbar {
+  width: 4px;
+}
+.notes-table-wrap::-webkit-scrollbar-track {
+  background: #f1f5f9;
+  border-radius: 10px;
+}
+.notes-table-wrap::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 10px;
+}
+.notes-table-wrap::-webkit-scrollbar-thumb:hover {
+  background: #10b981;
+}
+
+.classe-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.classe-item:hover {
+  background: rgba(16, 185, 129, 0.05);
+  border-color: var(--emerald);
+}
+
+.classe-item.active {
+  background: rgba(16, 185, 129, 0.1);
+  border-color: var(--emerald);
+}
+
+.classe-name {
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--text-primary);
+}
+
+.classe-count {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+.notes-table-wrap table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.notes-table-wrap th,
+.notes-table-wrap td {
+  padding: 10px 12px;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+
+.notes-table-wrap th {
+  font-weight: 600;
+  font-size: 11px;
+  color: var(--text-muted);
+  position: sticky;
+  top: 0;
+  background: white;
+  z-index: 1;
+}
+
+.input-note {
+  width: 70px;
+  padding: 6px 8px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-size: 13px;
+  font-family: 'Inter', sans-serif;
+  background: #f8fafc;
+  text-align: center;
+}
+
+.input-note:focus {
+  outline: none;
+  border-color: var(--emerald);
+  background: white;
+}
+
+.note-cell {
+  font-weight: 600;
+  font-size: 13px;
+}
+.note-cell.good { color: #10b981; }
+.note-cell.avg { color: #f59e0b; }
+.note-cell.bad { color: #ef4444; }
+
+.td-user {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.td-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #0a1628, #0f2044);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 600;
+  color: white;
+}
+
+.td-name {
+  font-weight: 500;
+  font-size: 13px;
+  color: var(--text-primary);
+}
+
+.empty-state {
+  text-align: center;
+  padding: 40px;
+  color: var(--text-muted);
+}
+
+.empty-state i {
+  font-size: 48px;
+  color: #cbd5e1;
+  margin-bottom: 16px;
+  display: block;
+}
+
+.empty-state h3 {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+}
+
+.empty-state p {
+  font-size: 13px;
+}
+
+/* MODAL PAIEMENT */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  backdrop-filter: blur(4px);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+}
+.modal.active {
+  display: flex;
+}
+.modal-content {
+  background: white;
+  border-radius: 20px;
+  width: 100%;
+  max-width: 450px;
+  position: relative;
+}
+.close-modal {
+  position: absolute;
+  top: 20px;
+  right: 25px;
+  background: none !important;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #94a3b8;
+  z-index: 10;
+  padding: 0;
+}
+.close-modal:hover {
+  color: #ef4444 !important;
+  transform: scale(1.1);
+}
+.form-header {
+  background: linear-gradient(135deg, #0a1628, #0f2044);
+  color: white;
+  padding: 20px 24px;
+  text-align: center;
+  border-radius: 20px 20px 0 0;
+}
+.form-header h2 {
+  font-size: 18px;
+  margin-bottom: 4px;
+}
+.form-header p {
+  font-size: 12px;
+  color: rgba(255,255,255,0.7);
+}
+.form-field label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #1e293b;
+  display: block;
+  margin-bottom: 4px;
+}
+.form-field label i {
+  color: #10b981;
+  margin-right: 4px;
+}
+.btn-cancel {
+  background: white;
+  border: 1px solid #e2e8f0;
+  color: #64748b;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 12px;
+  cursor: pointer;
+}
+.btn-cancel:hover {
+  background: #fef2f2;
+  border-color: #ef4444;
+  color: #dc2626;
+}
+.btn-submit {
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: white;
+  padding: 8px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 12px;
+  cursor: pointer;
+  border: none;
+}
+.btn-submit:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(16,185,129,0.3);
+}
+
+@media (max-width: 768px) {
+  .notes-grid {
+    grid-template-columns: 1fr;
+  }
+}
+</style>

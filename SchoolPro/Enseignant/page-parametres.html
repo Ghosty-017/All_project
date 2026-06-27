@@ -1,0 +1,66 @@
+<div class="page-header">
+    <h2><i class="fas fa-sliders" style="margin-right:10px;color:var(--emerald)"></i>Paramètres</h2>
+</div>
+
+<div class="settings-card">
+    <div class="settings-section">
+        <h3>Préférences</h3>
+        <div class="settings-row">
+            <div class="settings-label">Notifications</div>
+            <div class="settings-value">
+                <label class="toggle-switch">
+                    <input type="checkbox" checked onchange="showToast('Notifications ' + (this.checked ? 'activées' : 'désactivées'), 'info')">
+                    <span class="toggle-slider"></span>
+                </label>
+            </div>
+        </div>
+        <div class="settings-row">
+            <div class="settings-label">Mode sombre</div>
+            <div class="settings-value">
+                <label class="toggle-switch">
+                    <input type="checkbox" onchange="toggleTheme(this.checked)">
+                    <span class="toggle-slider"></span>
+                </label>
+            </div>
+        </div>
+        <div class="settings-row">
+            <div class="settings-label">Langue</div>
+            <div class="settings-value">
+                <select class="filter-select" onchange="showToast('Langue changée', 'info')">
+                    <option value="fr">Français</option>
+                    <option value="en">English</option>
+                    <option value="ht">Kreyòl</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="settings-section">
+        <h3>Sécurité</h3>
+        <div class="settings-row">
+            <div class="settings-label">Changer le mot de passe</div>
+            <div class="settings-value">
+                <button class="btn btn-outline" onclick="showToast('Ouvrir le formulaire', 'info')"><i class="fas fa-key"></i> Modifier</button>
+            </div>
+        </div>
+        <div class="settings-row">
+            <div class="settings-label">Double authentification</div>
+            <div class="settings-value">
+                <label class="toggle-switch">
+                    <input type="checkbox" onchange="showToast('Double authentification ' + (this.checked ? 'activée' : 'désactivée'), 'info')">
+                    <span class="toggle-slider"></span>
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <div class="settings-section">
+        <h3>Actions</h3>
+        <div class="settings-row">
+            <div class="settings-label">Exporter mes données</div>
+            <div class="settings-value">
+                <button class="btn btn-outline" onclick="showToast('Données exportées', 'success')"><i class="fas fa-file-export"></i> Exporter</button>
+            </div>
+        </div>
+    </div>
+</div>

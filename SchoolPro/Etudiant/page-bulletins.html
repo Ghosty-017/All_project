@@ -1,0 +1,69 @@
+<div class="page-header">
+    <h2><i class="fas fa-file-lines" style="margin-right:10px;color:var(--emerald)"></i>Mes bulletins</h2>
+    <div>
+        <button class="btn btn-outline" onclick="showToast('Historique des bulletins', 'info')"><i class="fas fa-history"></i> Historique</button>
+    </div>
+</div>
+
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;" id="bulletinsList">
+    <div class="bulletin-item" style="background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:20px;cursor:pointer;" onclick="showToast('Bulletin 1er Trimestre', 'info')">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+            <div>
+                <div style="font-size:11px;color:var(--text-muted);text-transform:uppercase;font-weight:600;">1er Trimestre</div>
+                <div style="font-weight:700;font-size:18px;">Bulletin 2024-2025</div>
+            </div>
+            <span class="badge green">Disponible</span>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:12px 0;">
+            <div style="text-align:center;padding:10px;background:#f8fafc;border-radius:8px;">
+                <div style="font-size:10px;color:var(--text-muted);">Moyenne</div>
+                <div style="font-weight:700;font-size:20px;color:var(--emerald);">82.5</div>
+            </div>
+            <div style="text-align:center;padding:10px;background:#f8fafc;border-radius:8px;">
+                <div style="font-size:10px;color:var(--text-muted);">Rang</div>
+                <div style="font-weight:700;font-size:20px;color:var(--gold);">3/28</div>
+            </div>
+            <div style="text-align:center;padding:10px;background:#f8fafc;border-radius:8px;">
+                <div style="font-size:10px;color:var(--text-muted);">Mention</div>
+                <div style="font-weight:700;font-size:20px;color:var(--emerald);">Bien</div>
+            </div>
+        </div>
+        <button class="btn btn-primary" style="width:100%;justify-content:center;" onclick="event.stopPropagation();showToast('Ouverture du bulletin', 'success')">
+            <i class="fas fa-eye"></i> Consulter
+        </button>
+    </div>
+
+    <div class="bulletin-item" style="background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:20px;cursor:pointer;opacity:0.6;" onclick="showToast('Bulletin 2e Trimestre', 'info')">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+            <div>
+                <div style="font-size:11px;color:var(--text-muted);text-transform:uppercase;font-weight:600;">2e Trimestre</div>
+                <div style="font-weight:700;font-size:18px;">Bulletin 2024-2025</div>
+            </div>
+            <span class="badge yellow">En cours</span>
+        </div>
+        <div style="text-align:center;padding:20px;color:var(--text-muted);">
+            <i class="fas fa-clock" style="font-size:24px;display:block;margin-bottom:8px;"></i>
+            <p>En cours de saisie...</p>
+        </div>
+        <button class="btn btn-outline" style="width:100%;justify-content:center;opacity:0.5;cursor:not-allowed;" disabled>
+            <i class="fas fa-lock"></i> Non disponible
+        </button>
+    </div>
+
+    <div class="bulletin-item" style="background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:20px;cursor:pointer;opacity:0.6;" onclick="showToast('Bulletin 3e Trimestre', 'info')">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+            <div>
+                <div style="font-size:11px;color:var(--text-muted);text-transform:uppercase;font-weight:600;">3e Trimestre</div>
+                <div style="font-weight:700;font-size:18px;">Bulletin 2024-2025</div>
+            </div>
+            <span class="badge blue">À venir</span>
+        </div>
+        <div style="text-align:center;padding:20px;color:var(--text-muted);">
+            <i class="fas fa-clock" style="font-size:24px;display:block;margin-bottom:8px;"></i>
+            <p>Pas encore disponible</p>
+        </div>
+        <button class="btn btn-outline" style="width:100%;justify-content:center;opacity:0.5;cursor:not-allowed;" disabled>
+            <i class="fas fa-lock"></i> Non disponible
+        </button>
+    </div>
+</div>
